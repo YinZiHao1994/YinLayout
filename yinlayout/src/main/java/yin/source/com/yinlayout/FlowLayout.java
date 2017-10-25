@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class FlowLayout extends ViewGroup {
     private List<Integer> childViewNumOfEachRow = new ArrayList<>();
-    private List<Integer> aboutLineHeight = new ArrayList<>();
+    private List<Integer> heightOfEachRow = new ArrayList<>();
     private boolean isFirstLayout = true;
 
     public FlowLayout(Context context) {
@@ -34,7 +34,7 @@ public class FlowLayout extends ViewGroup {
 
         /*onMeasure()方法会执行多次，每次执行先清空List防止多次叠加出错*/
         childViewNumOfEachRow.clear();
-        aboutLineHeight.clear();
+        heightOfEachRow.clear();
 
         /*默认的sizeWidth和sizeHeight的大小以match_parent计算，如果实际设置为wrap_content
         则会在setMeasuredDimension()后设置*/
@@ -63,24 +63,25 @@ public class FlowLayout extends ViewGroup {
 
 //            如果超过了最大宽度(match_parent所得)
             if (hasUsedLineWidth + childWidth > sizeWidth) {
+                heightOfEachRow.add(hasUsedLineHeight);
                 width = Math.max(hasUsedLineWidth, width);
                 height += hasUsedLineHeight;
+                //此时已经另起一行了，所以新的行高就是这个导致新起一行的view的高度，行宽同理
                 hasUsedLineHeight = childHeight;
                 hasUsedLineWidth = childWidth;
                 childViewNumOfEachRow.add(childNumOfLine);
                 childNumOfLine = 1;
-                aboutLineHeight.add(hasUsedLineHeight);
             } else {
                 hasUsedLineWidth += childWidth;
                 hasUsedLineHeight = Math.max(hasUsedLineHeight, childHeight);
                 childNumOfLine++;
             }
+            //前面每一次结算的时候都是结算了上一行的宽高，当到达最后一个view时，结算自己这一行（最后一行）的宽高
             if (i == count - 1) {
                 width = Math.max(hasUsedLineWidth, width);
                 height += hasUsedLineHeight;
-
                 childViewNumOfEachRow.add(childNumOfLine);
-                aboutLineHeight.add(hasUsedLineHeight);
+                heightOfEachRow.add(hasUsedLineHeight);
             }
         }
 
@@ -114,7 +115,7 @@ public class FlowLayout extends ViewGroup {
                     child.layout(lc, tc, rc, bc);
                 }
                 left = 0;
-                top += aboutLineHeight.get(i);
+                top += heightOfEachRow.get(i);
             }
             isFirstLayout = false;
         }
