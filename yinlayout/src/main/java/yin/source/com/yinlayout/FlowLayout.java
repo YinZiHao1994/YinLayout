@@ -56,10 +56,21 @@ public class FlowLayout extends ViewGroup {
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
             measureChild(child, widthMeasureSpec, heightMeasureSpec);
-            MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
+            LayoutParams layoutParams = child.getLayoutParams();
+            int leftMargin = 0;
+            int rightMargin = 0;
+            int topMargin = 0;
+            int bottomMargin = 0;
+            if (layoutParams instanceof MarginLayoutParams) {
+                MarginLayoutParams marginLayoutParams = (MarginLayoutParams) layoutParams;
+                leftMargin = marginLayoutParams.leftMargin;
+                rightMargin = marginLayoutParams.rightMargin;
+                topMargin = marginLayoutParams.topMargin;
+                bottomMargin = marginLayoutParams.bottomMargin;
+            }
 //            child所占的宽高需要考虑它的margin
-            int childWidth = child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;
-            int childHeight = child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin;
+            int childWidth = child.getMeasuredWidth() + leftMargin + rightMargin;
+            int childHeight = child.getMeasuredHeight() + topMargin + bottomMargin;
 
 //            如果超过了最大宽度(match_parent所得)
             if (hasUsedLineWidth + childWidth > sizeWidth) {
@@ -104,13 +115,13 @@ public class FlowLayout extends ViewGroup {
                 for (int j = 0; j < childViewNumOfEachRow.get(i); j++) {
                     View child = getChildAt(childCursor);
 
-                    MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
+                    MarginLayoutParams marginLayoutParams = (MarginLayoutParams) child.getLayoutParams();
 
-                    int lc = lp.leftMargin + left;
-                    int tc = lp.topMargin + top;
+                    int lc = marginLayoutParams.leftMargin + left;
+                    int tc = marginLayoutParams.topMargin + top;
                     int rc = lc + child.getMeasuredWidth();
                     int bc = tc + child.getMeasuredHeight();
-                    left += lp.leftMargin + lp.rightMargin + child.getMeasuredWidth();
+                    left += marginLayoutParams.leftMargin + marginLayoutParams.rightMargin + child.getMeasuredWidth();
                     childCursor++;
                     child.layout(lc, tc, rc, bc);
                 }
