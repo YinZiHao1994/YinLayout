@@ -114,14 +114,22 @@ public class FlowLayout extends ViewGroup {
 
                 for (int j = 0; j < childViewNumOfEachRow.get(i); j++) {
                     View child = getChildAt(childCursor);
+                    int leftMargin = 0;
+                    int topMargin = 0;
+                    int rightMargin = 0;
+                    LayoutParams layoutParams = child.getLayoutParams();
+                    if (layoutParams instanceof MarginLayoutParams) {
+                        MarginLayoutParams marginLayoutParams = (MarginLayoutParams) layoutParams;
+                        leftMargin = marginLayoutParams.leftMargin;
+                        topMargin = marginLayoutParams.topMargin;
+                        rightMargin = marginLayoutParams.rightMargin;
+                    }
 
-                    MarginLayoutParams marginLayoutParams = (MarginLayoutParams) child.getLayoutParams();
-
-                    int lc = marginLayoutParams.leftMargin + left;
-                    int tc = marginLayoutParams.topMargin + top;
+                    int lc = leftMargin + left;
+                    int tc = topMargin + top;
                     int rc = lc + child.getMeasuredWidth();
                     int bc = tc + child.getMeasuredHeight();
-                    left += marginLayoutParams.leftMargin + marginLayoutParams.rightMargin + child.getMeasuredWidth();
+                    left += leftMargin + rightMargin + child.getMeasuredWidth();
                     childCursor++;
                     child.layout(lc, tc, rc, bc);
                 }
