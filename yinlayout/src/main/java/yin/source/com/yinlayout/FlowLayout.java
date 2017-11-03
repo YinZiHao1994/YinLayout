@@ -15,7 +15,6 @@ import java.util.List;
 public class FlowLayout extends ViewGroup {
     private List<Integer> childViewNumOfEachRow = new ArrayList<>();
     private List<Integer> heightOfEachRow = new ArrayList<>();
-    private boolean isFirstLayout = true;
 
     public FlowLayout(Context context) {
         this(context, null);
@@ -105,38 +104,34 @@ public class FlowLayout extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
-        /*避免多次执行*/
-        if (isFirstLayout) {
-            int left = 0;
-            int top = 0;
-            int childCursor = 0;
-            for (int i = 0; i < childViewNumOfEachRow.size(); i++) {
+        int left = 0;
+        int top = 0;
+        int childCursor = 0;
+        for (int i = 0; i < childViewNumOfEachRow.size(); i++) {
 
-                for (int j = 0; j < childViewNumOfEachRow.get(i); j++) {
-                    View child = getChildAt(childCursor);
-                    int leftMargin = 0;
-                    int topMargin = 0;
-                    int rightMargin = 0;
-                    LayoutParams layoutParams = child.getLayoutParams();
-                    if (layoutParams instanceof MarginLayoutParams) {
-                        MarginLayoutParams marginLayoutParams = (MarginLayoutParams) layoutParams;
-                        leftMargin = marginLayoutParams.leftMargin;
-                        topMargin = marginLayoutParams.topMargin;
-                        rightMargin = marginLayoutParams.rightMargin;
-                    }
-
-                    int lc = leftMargin + left;
-                    int tc = topMargin + top;
-                    int rc = lc + child.getMeasuredWidth();
-                    int bc = tc + child.getMeasuredHeight();
-                    left += leftMargin + rightMargin + child.getMeasuredWidth();
-                    childCursor++;
-                    child.layout(lc, tc, rc, bc);
+            for (int j = 0; j < childViewNumOfEachRow.get(i); j++) {
+                View child = getChildAt(childCursor);
+                int leftMargin = 0;
+                int topMargin = 0;
+                int rightMargin = 0;
+                LayoutParams layoutParams = child.getLayoutParams();
+                if (layoutParams instanceof MarginLayoutParams) {
+                    MarginLayoutParams marginLayoutParams = (MarginLayoutParams) layoutParams;
+                    leftMargin = marginLayoutParams.leftMargin;
+                    topMargin = marginLayoutParams.topMargin;
+                    rightMargin = marginLayoutParams.rightMargin;
                 }
-                left = 0;
-                top += heightOfEachRow.get(i);
+
+                int lc = leftMargin + left;
+                int tc = topMargin + top;
+                int rc = lc + child.getMeasuredWidth();
+                int bc = tc + child.getMeasuredHeight();
+                left += leftMargin + rightMargin + child.getMeasuredWidth();
+                childCursor++;
+                child.layout(lc, tc, rc, bc);
             }
-            isFirstLayout = false;
+            left = 0;
+            top += heightOfEachRow.get(i);
         }
     }
 
