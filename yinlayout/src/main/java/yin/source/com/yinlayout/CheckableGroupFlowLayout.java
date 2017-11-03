@@ -1,6 +1,7 @@
 package yin.source.com.yinlayout;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Checkable;
@@ -31,6 +32,16 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
 
     public CheckableGroupFlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CheckableGroupFlowLayout,
+                defStyleAttr, 0);
+        int n = a.getIndexCount();
+        for (int i = 0; i < n; i++) {
+            int attr = a.getIndex(i);
+            if (attr == R.styleable.CheckableGroupFlowLayout_multiple) {
+                this.isMultiple = a.getBoolean(attr, false);
+            }
+        }
+        a.recycle();
     }
 
 
@@ -89,7 +100,7 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
         isMultiple = multiple;
     }
 
-    interface ChildViewCheckListener {
+    public interface ChildViewCheckListener {
 
         void onChildViewCheckedStateChanged(Checkable checkable);
 

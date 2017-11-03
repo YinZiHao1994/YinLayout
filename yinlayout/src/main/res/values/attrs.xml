@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="multiple" format="boolean" />
+
+    <declare-styleable name="CheckableGroupFlowLayout">
+        <attr name="multiple" />
+    </declare-styleable>
+</resources>
