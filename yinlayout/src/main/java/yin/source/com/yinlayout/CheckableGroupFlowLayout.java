@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 单选
+ * 选择标签 Layout
  * Created by yin on 2017/11/3.
  */
 
@@ -47,14 +47,14 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-            int childCount = getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                View childView = getChildAt(i);
-                if (childView instanceof Checkable) {
-                    childView.setOnClickListener(this);
-                    checkableList.add((Checkable) childView);
-                }
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View childView = getChildAt(i);
+            if (childView instanceof Checkable) {
+                childView.setOnClickListener(this);
+                checkableList.add((Checkable) childView);
             }
+        }
     }
 
 

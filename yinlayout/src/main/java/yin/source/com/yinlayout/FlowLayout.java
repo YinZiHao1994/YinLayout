@@ -2,6 +2,7 @@ package yin.source.com.yinlayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,9 +13,11 @@ import java.util.List;
  * 标签布局
  * Created by Yin on 2017/10/25.
  */
-public class FlowLayout extends ViewGroup {
+public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChangeListener {
     private List<Integer> childViewNumOfEachRow = new ArrayList<>();
     private List<Integer> heightOfEachRow = new ArrayList<>();
+    private FlowLayoutAdapter flowLayoutAdapter;
+    private Context context;
 
     public FlowLayout(Context context) {
         this(context, null);
@@ -26,6 +29,7 @@ public class FlowLayout extends ViewGroup {
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
     }
 
     @Override
@@ -140,4 +144,26 @@ public class FlowLayout extends ViewGroup {
         return new MarginLayoutParams(getContext(), attrs);
     }
 
+
+    public void setAdapter(FlowLayoutAdapter flowLayoutAdapter) {
+        this.flowLayoutAdapter = flowLayoutAdapter;
+        flowLayoutAdapter.addDataChangeListener(this);
+
+        onDataChange();
+    }
+
+    @Override
+    public void onDataChange() {
+        removeAllViews();
+        int itemCount = flowLayoutAdapter.getItemCount();
+        for (int i = 0; i < itemCount; i++) {
+//            View itemView = flowLayoutAdapter.getItemView(this, i);
+            int layoutRes = flowLayoutAdapter.getLayoutRes();
+            if (layoutRes != 0) {
+                View view = LayoutInflater.from(context).inflate(layoutRes, this, false);
+                addView(view);
+                flowLayoutAdapter.onDataBind(view, i);
+            }
+        }
+    }
 }
