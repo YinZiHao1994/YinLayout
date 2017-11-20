@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 选择标签 Layout
+ * 用于选择标签的流式布局，要求直接的子 View 实现{@link Checkable}接口或者利用框架中的实现了接口的{@link CheckableTag}包裹
  * Created by yin on 2017/11/3.
  */
 
 public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClickListener {
 
     private List<Checkable> checkableList = new ArrayList<>();
-    private ChildViewCheckListener childViewCheckListener;
+    private OnChildViewCheckListener onChildViewCheckListener;
     //是否能多选
     private boolean isMultiple;
 
@@ -48,6 +48,7 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
         int childCount = getChildCount();
+        checkableList.clear();
         for (int i = 0; i < childCount; i++) {
             View childView = getChildAt(i);
             if (childView instanceof Checkable) {
@@ -68,18 +69,18 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
                     if (checkable != chooseCheckable) {
                         if (checkable.isChecked()) {
                             checkable.setChecked(false);
-                            if (childViewCheckListener != null) {
-                                childViewCheckListener.onChildViewCheckedStateChanged(checkable);
+                            if (onChildViewCheckListener != null) {
+                                onChildViewCheckListener.onChildViewCheckedStateChanged(checkable);
                             }
                         }
                     }
                 }
             }
 
-            chooseCheckable.setChecked(!chooseCheckable.isChecked());
+            chooseCheckable.toggle();
 
-            if (childViewCheckListener != null) {
-                childViewCheckListener.onChildViewCheckedStateChanged(chooseCheckable);
+            if (onChildViewCheckListener != null) {
+                onChildViewCheckListener.onChildViewCheckedStateChanged(chooseCheckable);
             }
         }
     }
@@ -93,17 +94,27 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
         isMultiple = multiple;
     }
 
-    public interface ChildViewCheckListener {
 
+    public List<Checkable> getHaveCheckedList() {
+        List<Checkable> haveCheckedList = new ArrayList<>();
+        for (Checkable checkable : checkableList) {
+            if (checkable.isChecked()) {
+                haveCheckedList.add(checkable);
+            }
+        }
+        return haveCheckedList;
+    }
+
+
+    public interface OnChildViewCheckListener {
         void onChildViewCheckedStateChanged(Checkable checkable);
-
     }
 
-    public ChildViewCheckListener getChildViewCheckListener() {
-        return childViewCheckListener;
+    public OnChildViewCheckListener getOnChildViewCheckListener() {
+        return onChildViewCheckListener;
     }
 
-    public void setChildViewCheckListener(ChildViewCheckListener childViewCheckListener) {
-        this.childViewCheckListener = childViewCheckListener;
+    public void setOnChildViewCheckListener(OnChildViewCheckListener onChildViewCheckListener) {
+        this.onChildViewCheckListener = onChildViewCheckListener;
     }
 }
