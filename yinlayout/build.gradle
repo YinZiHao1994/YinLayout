@@ -4,14 +4,14 @@ apply plugin: 'com.novoda.bintray-release'
 
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 9
-        versionName "1.6.0"
+        targetSdkVersion 26
+        versionCode 10
+        versionName "1.7.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -33,7 +33,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
     testCompile 'junit:junit:4.12'
 }
 
@@ -43,7 +43,7 @@ publish {
     userOrg = 'yinzihaoos'//bintray.com用户名
     groupId = 'com.yinzihao'//jcenter上的路径
     artifactId = 'YinLayout'//项目名称
-    publishVersion = '1.6.0'//版本号
+    publishVersion = '1.7.0'//版本号
     desc = '一个自定义布局库'//描述，不重要
     website = 'https://github.com/YinZiHao1994/YinLayout.git'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
@@ -52,4 +52,4 @@ publish {
 
 //把库上传到jcenter的命令
 //windows: gradlew clean build bintrayUpload   -PbintrayUser=xxx   -PbintrayKey=xxx   -PdryRun=false
-//osX:  ./gradlew clean build bintrayUpload   -PbintrayUser=xxx   -PbintrayKey=f3a9bd7e8eb569ee6aedadeee23813cdc6d57e06   -PdryRun=false
+//osX:  ./gradlew clean build bintrayUpload   -PbintrayUser=yinzihaoos   -PbintrayKey=f3a9bd7e8eb569ee6aedadeee23813cdc6d57e06   -PdryRun=false

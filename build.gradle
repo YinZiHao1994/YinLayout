@@ -11,13 +11,14 @@ buildscript {
         // in the individual module build.gradle files
 
         //bintray-release 插件 把库上传到jcenter的相关配置
-        classpath 'com.novoda:bintray-release:0.4.0'
+        classpath 'com.novoda:bintray-release:0.8.0'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 
     //bintray-release 插件 把库上传到jcenter的相关配置

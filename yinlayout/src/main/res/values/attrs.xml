@@ -5,4 +5,8 @@
     <declare-styleable name="CheckableGroupFlowLayout">
         <attr name="multiple" />
     </declare-styleable>
+
+    <declare-styleable name="CommonCheckableGroup">
+        <attr name="multiple" />
+    </declare-styleable>
 </resources>

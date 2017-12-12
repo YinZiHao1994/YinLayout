@@ -1,16 +1,20 @@
-package yin.source.com.yinlayout;
+package yin.source.com.yinlayout.flowLayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Checkable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import yin.source.com.yinlayout.CheckableTag;
+import yin.source.com.yinlayout.R;
+
 /**
- * 用于选择标签的流式布局，要求直接的子 View 实现{@link Checkable}接口或者利用框架中的实现了接口的{@link CheckableTag}包裹
+ * 用于选择标签的流式布局，要求直接的子 View 实现{@link Checkable}接口或者利用框架中的{@link CheckableTag}包裹
  * Created by yin on 2017/11/3.
  */
 
@@ -63,28 +67,45 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
     public void onClick(View v) {
         if (v instanceof Checkable) {
             Checkable chooseCheckable = (Checkable) v;
-
             if (!isMultiple) {
                 for (Checkable checkable : checkableList) {
                     if (checkable != chooseCheckable) {
                         if (checkable.isChecked()) {
-                            checkable.setChecked(false);
-                            if (onChildViewCheckListener != null) {
-                                onChildViewCheckListener.onChildViewCheckedStateChanged(checkable);
-                            }
+                            changeCheckedState(checkable, false);
                         }
                     }
                 }
             }
+            changeCheckedState(chooseCheckable, !chooseCheckable.isChecked());
+        }
+    }
 
-            chooseCheckable.toggle();
 
+    private void changeCheckedState(Checkable checkable, boolean isChecked) {
+        if (checkable != null) {
+            checkable.setChecked(isChecked);
             if (onChildViewCheckListener != null) {
-                onChildViewCheckListener.onChildViewCheckedStateChanged(chooseCheckable);
+                onChildViewCheckListener.onChildViewCheckedStateChanged(checkable);
+            }
+            if (checkable instanceof ViewGroup) {
+                changeChildCheckState((ViewGroup) checkable, isChecked);
             }
         }
     }
 
+    //修改所有 checkable 的子 view 的 checked 属性
+    private void changeChildCheckState(ViewGroup viewGroup, boolean checked) {
+        int childCount = viewGroup.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View childView = viewGroup.getChildAt(i);
+            if (childView instanceof Checkable) {
+                ((Checkable) childView).setChecked(checked);
+            }
+            if (childView instanceof ViewGroup) {
+                changeChildCheckState((ViewGroup) childView, checked);
+            }
+        }
+    }
 
     public boolean isMultiple() {
         return isMultiple;

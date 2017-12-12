@@ -1,4 +1,4 @@
-package yin.source.com.yinlayout;
+package yin.source.com.yinlayout.flowLayout;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by yin on 2017/11/17.
+ * Created by yin on 2017/12/12.
  */
 
-public abstract class FlowLayoutAdapter<T> {
+public abstract class BaseLayoutAdapter<T> {
 
     private Context context;
     private List<T> dataList;
@@ -20,7 +20,7 @@ public abstract class FlowLayoutAdapter<T> {
     @LayoutRes
     private int layoutRes;
 
-    public FlowLayoutAdapter(Context context, List<T> dataList, int layoutRes) {
+    public BaseLayoutAdapter(Context context, List<T> dataList, int layoutRes) {
         this.context = context;
         this.dataList = dataList;
         this.layoutRes = layoutRes;
@@ -70,5 +70,4 @@ public abstract class FlowLayoutAdapter<T> {
         }
         dataChangeListenerList.add(dataChangeListener);
     }
-
 }

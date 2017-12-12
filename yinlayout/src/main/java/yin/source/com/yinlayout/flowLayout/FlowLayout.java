@@ -1,4 +1,4 @@
-package yin.source.com.yinlayout;
+package yin.source.com.yinlayout.flowLayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
