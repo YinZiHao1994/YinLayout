@@ -17,7 +17,7 @@ import yin.source.com.yinlayout.flowLayout.BaseLayoutAdapter;
 
 /**
  * 多选或单选项的父布局，类似于{@link android.widget.RadioGroup},
- * 直接子 View 需要实现{@link Checkable}接口或利用框架中的{@link CheckableTag}包裹
+ * 直接子 View 需要实现{@link Checkable}接口或利用框架中的{@link CheckableTag}包裹才能被监听选中状态
  * Created by yin on 2017/12/12.
  */
 
@@ -72,16 +72,18 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        Checkable checkableView = (Checkable) v;
-        if (!isMultiple) {
-            for (Checkable checkable : checkableList) {
-                if (checkable != checkableView) {
-                    changeCheckedState(checkable, false);
+        if (v instanceof Checkable) {
+            Checkable checkableView = (Checkable) v;
+            if (!isMultiple) {
+                for (Checkable checkable : checkableList) {
+                    if (checkable != checkableView) {
+                        changeCheckedState(checkable, false);
+                    }
                 }
+                changeCheckedState(checkableView, true);
+            } else {
+                changeCheckedState(checkableView, !checkableView.isChecked());
             }
-            changeCheckedState(checkableView, true);
-        } else {
-            changeCheckedState(checkableView, !checkableView.isChecked());
         }
     }
 
@@ -101,7 +103,7 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     //修改所有 checkable 的子 view 的 checked 属性
     private void changeChildCheckState(ViewGroup viewGroup, boolean checked) {
         int childCount = viewGroup.getChildCount();
-        for (int i = 0;i<childCount;i++) {
+        for (int i = 0; i < childCount; i++) {
             View childView = viewGroup.getChildAt(i);
             if (childView instanceof Checkable) {
                 ((Checkable) childView).setChecked(checked);
