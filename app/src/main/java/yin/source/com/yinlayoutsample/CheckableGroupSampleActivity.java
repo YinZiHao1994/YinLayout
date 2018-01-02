@@ -28,6 +28,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
     private TextView tvCheckedUseAdapter;
 
     private CommonCheckableGroup commonCheckableGroupUseAdapter;
+    private CommonCheckableGroup commonCheckableGroupUseAdapterHorizontal;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
         tvChecked = findViewById(R.id.tv_checked);
 
         commonCheckableGroupUseAdapter = findViewById(R.id.common_checkable_group_use_adapter);
+        commonCheckableGroupUseAdapterHorizontal = findViewById(R.id.common_checkable_group_use_adapter_horizontal);
         tvCheckedUseAdapter = findViewById(R.id.tv_checked_use_adapter);
         stringList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -60,7 +62,15 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
             @Override
             public void onCheckChange(Checkable checkable) {
                 showCheckedUseAdapter();
+            }
+        });
 
+
+        commonCheckableGroupUseAdapterHorizontal.setAdapter(new BaseLayoutAdapter<String>(getApplicationContext(), stringList, R.layout.checkable_group_layout_item_horizontal) {
+            @Override
+            public void dataBind(View itemView, int position, String data) {
+                TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
+                textView.setText(data);
             }
         });
     }
