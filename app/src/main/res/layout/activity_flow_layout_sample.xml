@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="FlowLayout" />
 
-    <yin.source.com.yinlayout.flowLayout.FlowLayout
+    <com.source.yin.yinlayout.flowLayout.FlowLayout
         android:id="@+id/flow_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="CheckableGroupFlowLayout" />
 
-    <yin.source.com.yinlayout.flowLayout.CheckableGroupFlowLayout
+    <com.source.yin.yinlayout.flowLayout.CheckableGroupFlowLayout
         android:id="@+id/checkable_flow_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:text="CheckableGroupFlowLayout(多选)" />
 
-    <yin.source.com.yinlayout.flowLayout.CheckableGroupFlowLayout
+    <com.source.yin.yinlayout.flowLayout.CheckableGroupFlowLayout
         android:id="@+id/checkable_flow_layout_multiple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

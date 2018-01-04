@@ -16,13 +16,13 @@
             android:layout_marginBottom="5dp"
             android:text="xml 中设置布局(纵向)" />
 
-        <yin.source.com.yinlayout.CommonCheckableGroup
+        <com.source.yin.yinlayout.CommonCheckableGroup
             android:id="@+id/common_checkable_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <yin.source.com.yinlayout.CheckableTag
+            <com.source.yin.yinlayout.CheckableTag
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -39,9 +39,9 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
 
-            </yin.source.com.yinlayout.CheckableTag>
+            </com.source.yin.yinlayout.CheckableTag>
 
-            <yin.source.com.yinlayout.CheckableTag
+            <com.source.yin.yinlayout.CheckableTag
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -59,8 +59,8 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
 
-            </yin.source.com.yinlayout.CheckableTag>
-        </yin.source.com.yinlayout.CommonCheckableGroup>
+            </com.source.yin.yinlayout.CheckableTag>
+        </com.source.yin.yinlayout.CommonCheckableGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,13 +86,13 @@
             android:layout_marginTop="10dp"
             android:text="xml 中设置布局(横向)" />
 
-        <yin.source.com.yinlayout.CommonCheckableGroup
+        <com.source.yin.yinlayout.CommonCheckableGroup
             android:id="@+id/common_checkable_group_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <yin.source.com.yinlayout.CheckableTag
+            <com.source.yin.yinlayout.CheckableTag
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -103,15 +103,16 @@
                     <CheckedTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:background="@drawable/background_selector"
                         android:padding="10dp"
                         android:text="选项1"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
 
-            </yin.source.com.yinlayout.CheckableTag>
+            </com.source.yin.yinlayout.CheckableTag>
 
-            <yin.source.com.yinlayout.CheckableTag
+            <com.source.yin.yinlayout.CheckableTag
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -129,8 +130,8 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
 
-            </yin.source.com.yinlayout.CheckableTag>
-        </yin.source.com.yinlayout.CommonCheckableGroup>
+            </com.source.yin.yinlayout.CheckableTag>
+        </com.source.yin.yinlayout.CommonCheckableGroup>
 
 
         <TextView
@@ -139,7 +140,7 @@
             android:layout_marginTop="20dp"
             android:text="adapter 设置布局(多选)" />
 
-        <yin.source.com.yinlayout.CommonCheckableGroup
+        <com.source.yin.yinlayout.CommonCheckableGroup
             android:id="@+id/common_checkable_group_use_adapter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,7 +171,7 @@
             android:layout_marginTop="20dp"
             android:text="adapter 设置布局(横向单选)" />
 
-        <yin.source.com.yinlayout.CommonCheckableGroup
+        <com.source.yin.yinlayout.CommonCheckableGroup
             android:id="@+id/common_checkable_group_use_adapter_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
