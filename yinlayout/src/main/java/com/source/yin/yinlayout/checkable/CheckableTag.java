@@ -1,4 +1,4 @@
-package com.source.yin.yinlayout;
+package com.source.yin.yinlayout.checkable;
 
 import android.content.Context;
 import android.support.annotation.AttrRes;

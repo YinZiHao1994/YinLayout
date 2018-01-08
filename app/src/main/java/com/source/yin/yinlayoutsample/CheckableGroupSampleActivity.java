@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import com.source.yin.yinlayout.BaseLayoutAdapter;
+import com.source.yin.yinlayout.checkable.CommonCheckableGroup;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.source.yin.yinlayout.CommonCheckableGroup;
-import com.source.yin.yinlayout.flowLayout.BaseLayoutAdapter;
 
 /**
  * Created by yin on 2017/12/12.
@@ -50,7 +50,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
     }
 
     private void initCommonCheckableGroupUseAdapter() {
-        commonCheckableGroupUseAdapter.setAdapter(new BaseLayoutAdapter<String>(getApplicationContext(), stringList, R.layout.checkable_group_layout_item) {
+        commonCheckableGroupUseAdapter.setLayoutAdapter(new BaseLayoutAdapter<String>(getApplicationContext(), stringList, R.layout.checkable_group_layout_item) {
             @Override
             public void dataBind(View itemView, int position, String data) {
                 TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
@@ -66,7 +66,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
         });
 
 
-        commonCheckableGroupUseAdapterHorizontal.setAdapter(new BaseLayoutAdapter<String>(getApplicationContext(), stringList, R.layout.checkable_group_layout_item_horizontal) {
+        commonCheckableGroupUseAdapterHorizontal.setLayoutAdapter(new BaseLayoutAdapter<String>(getApplicationContext(), stringList, R.layout.checkable_group_layout_item_horizontal) {
             @Override
             public void dataBind(View itemView, int position, String data) {
                 TextView textView = (TextView) itemView.findViewById(R.id.tv_item);

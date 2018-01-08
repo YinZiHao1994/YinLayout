@@ -1,4 +1,4 @@
-package com.source.yin.yinlayout;
+package com.source.yin.yinlayout.checkable;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
 
+import com.source.yin.yinlayout.BaseLayoutAdapter;
+import com.source.yin.yinlayout.LayoutByAdapterAble;
+import com.source.yin.yinlayout.R;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.source.yin.yinlayout.flowLayout.BaseLayoutAdapter;
 
 /**
  * 多选或单选项的父布局，类似于{@link android.widget.RadioGroup},
@@ -21,7 +23,7 @@ import com.source.yin.yinlayout.flowLayout.BaseLayoutAdapter;
  * Created by yin on 2017/12/12.
  */
 
-public class CommonCheckableGroup extends LinearLayout implements View.OnClickListener, BaseLayoutAdapter.DataChangeListener {
+public class CommonCheckableGroup extends LinearLayout implements View.OnClickListener, BaseLayoutAdapter.DataChangeListener, LayoutByAdapterAble {
 
     //是否能多选
     private boolean isMultiple;
@@ -127,18 +129,6 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
         return checkedItemList;
     }
 
-
-    public BaseLayoutAdapter getAdapter() {
-        return adapter;
-    }
-
-    public void setAdapter(BaseLayoutAdapter adapter) {
-        this.adapter = adapter;
-        adapter.addDataChangeListener(this);
-        onDataChange();
-
-    }
-
     public CheckedListener getCheckedListener() {
         return checkedListener;
     }
@@ -161,6 +151,20 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
             }
         }
     }
+
+    @Override
+    public void setLayoutAdapter(BaseLayoutAdapter adapter) {
+        this.adapter = adapter;
+        adapter.addDataChangeListener(this);
+        onDataChange();
+
+    }
+
+    @Override
+    public BaseLayoutAdapter getLayoutAdapter() {
+        return adapter;
+    }
+
 
     public interface CheckedListener {
 

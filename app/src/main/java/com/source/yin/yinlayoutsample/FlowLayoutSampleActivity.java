@@ -7,13 +7,13 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import com.source.yin.yinlayout.checkable.CheckableTag;
+import com.source.yin.yinlayout.flowlayout.CheckableGroupFlowLayout;
+import com.source.yin.yinlayout.flowlayout.FlowLayout;
+import com.source.yin.yinlayout.flowlayout.FlowLayoutAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.source.yin.yinlayout.CheckableTag;
-import com.source.yin.yinlayout.flowLayout.CheckableGroupFlowLayout;
-import com.source.yin.yinlayout.flowLayout.FlowLayout;
-import com.source.yin.yinlayout.flowLayout.FlowLayoutAdapter;
 
 /**
  * Created by yin on 2017/12/12.
@@ -52,10 +52,10 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
 
 
     private void initCheckableFlowLayout() {
-        checkableGroupFlowLayout.setAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item) {
+        checkableGroupFlowLayout.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item) {
             @Override
             public void dataBind(View itemView, int position, String data) {
-                TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
+                TextView textView = itemView.findViewById(R.id.tv_item);
                 textView.setText(data);
             }
         });
@@ -74,10 +74,10 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
         });
 
 
-        checkableGroupFlowLayoutMultiple.setAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item2) {
+        checkableGroupFlowLayoutMultiple.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item2) {
             @Override
             public void dataBind(View itemView, int position, String data) {
-                TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
+                TextView textView = itemView.findViewById(R.id.tv_item);
                 textView.setText(data);
             }
         });
@@ -91,10 +91,10 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
     }
 
     private void initFlowLayout() {
-        flowLayout.setAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.default_flow_layout_item) {
+        flowLayout.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.default_flow_layout_item) {
             @Override
             public void dataBind(View itemView, int position, String data) {
-                TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
+                TextView textView = itemView.findViewById(R.id.tv_item);
                 textView.setText(data);
             }
         });

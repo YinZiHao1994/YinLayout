@@ -9,15 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.source.yin.yinlayoutsample.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.source.yin.yinlayoutsample.CheckableGroupSampleActivity"/>
-        <activity android:name="com.source.yin.yinlayoutsample.FlowLayoutSampleActivity"/>
+        <activity android:name=".CheckableGroupSampleActivity" />
+        <activity android:name=".FlowLayoutSampleActivity" />
+        <activity android:name=".MoonMenuActivity"></activity>
     </application>
 
 </manifest>

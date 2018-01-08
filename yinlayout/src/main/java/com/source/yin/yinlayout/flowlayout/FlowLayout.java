@@ -1,10 +1,12 @@
-package com.source.yin.yinlayout.flowLayout;
+package com.source.yin.yinlayout.flowlayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.source.yin.yinlayout.LayoutByAdapterAble;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
  * 标签布局
  * Created by Yin on 2017/10/25.
  */
-public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChangeListener {
+public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChangeListener, LayoutByAdapterAble<FlowLayoutAdapter> {
     private List<Integer> childViewNumOfEachRow = new ArrayList<>();
     private List<Integer> heightOfEachRow = new ArrayList<>();
     private FlowLayoutAdapter flowLayoutAdapter;
@@ -145,13 +147,6 @@ public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChang
     }
 
 
-    public void setAdapter(FlowLayoutAdapter flowLayoutAdapter) {
-        this.flowLayoutAdapter = flowLayoutAdapter;
-        flowLayoutAdapter.addDataChangeListener(this);
-
-        onDataChange();
-    }
-
     @Override
     public void onDataChange() {
         removeAllViews();
@@ -165,5 +160,18 @@ public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChang
                 flowLayoutAdapter.onDataBind(view, i);
             }
         }
+    }
+
+
+    @Override
+    public void setLayoutAdapter(FlowLayoutAdapter adapter) {
+        this.flowLayoutAdapter = adapter;
+        flowLayoutAdapter.addDataChangeListener(this);
+        onDataChange();
+    }
+
+    @Override
+    public FlowLayoutAdapter getLayoutAdapter() {
+        return flowLayoutAdapter;
     }
 }

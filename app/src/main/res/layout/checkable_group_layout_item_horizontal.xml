@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.source.yin.yinlayout.CheckableTag xmlns:android="http://schemas.android.com/apk/res/android"
+<com.source.yin.yinlayout.checkable.CheckableTag xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
@@ -11,4 +11,4 @@
         android:background="@drawable/background_selector"
         android:padding="10dp"
         android:textColor="@android:color/white" />
-</com.source.yin.yinlayout.CheckableTag>
+</com.source.yin.yinlayout.checkable.CheckableTag>

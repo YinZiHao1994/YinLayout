@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button btnFlowLayout;
     private Button btnCheckableGroup;
+    private Button btnMoonMenu;
 
 
     @Override
@@ -19,9 +20,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         btnFlowLayout = findViewById(R.id.btn_flow_layout);
         btnCheckableGroup = findViewById(R.id.btn_checkable_group);
+        btnMoonMenu = findViewById(R.id.btn_moon_menu);
 
         btnFlowLayout.setOnClickListener(this);
         btnCheckableGroup.setOnClickListener(this);
+        btnMoonMenu.setOnClickListener(this);
     }
 
     @Override
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_checkable_group:
                 intent = new Intent(getApplicationContext(), CheckableGroupSampleActivity.class);
+                break;
+            case R.id.btn_moon_menu:
+                intent = new Intent(getApplicationContext(), MoonMenuActivity.class);
                 break;
         }
         if (intent != null) {

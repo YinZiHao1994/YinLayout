@@ -1,4 +1,4 @@
-package com.source.yin.yinlayout.flowLayout;
+package com.source.yin.yinlayout;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 为实现了{@link LayoutByAdapterAble}接口的 viewGroup 提供 adapter 方式的 layout
  * Created by yin on 2017/12/12.
  */
 

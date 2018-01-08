@@ -1,4 +1,4 @@
-package com.source.yin.yinlayout.flowLayout;
+package com.source.yin.yinlayout.flowlayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Checkable;
 
+import com.source.yin.yinlayout.checkable.CheckableTag;
+import com.source.yin.yinlayout.R;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.source.yin.yinlayout.CheckableTag;
-import com.source.yin.yinlayout.R;
 
 /**
  * 用于选择标签的流式布局，要求直接的子 View 实现{@link Checkable}接口或者利用框架中的{@link CheckableTag}包裹
