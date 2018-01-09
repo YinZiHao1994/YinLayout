@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
 
-import com.source.yin.yinlayout.BaseLayoutAdapter;
-import com.source.yin.yinlayout.LayoutByAdapterAble;
+import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
+import com.source.yin.yinlayout.layoutadapter.LayoutByAdapterAble;
 import com.source.yin.yinlayout.R;
 
 import java.util.ArrayList;

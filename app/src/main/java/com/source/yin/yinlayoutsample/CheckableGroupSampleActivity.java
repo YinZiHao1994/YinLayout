@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.TextView;
 
-import com.source.yin.yinlayout.BaseLayoutAdapter;
+import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
 import com.source.yin.yinlayout.checkable.CommonCheckableGroup;
 
 import java.util.ArrayList;

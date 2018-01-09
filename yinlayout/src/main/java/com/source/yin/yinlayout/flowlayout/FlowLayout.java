@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.source.yin.yinlayout.LayoutByAdapterAble;
+import com.source.yin.yinlayout.layoutadapter.LayoutByAdapterAble;
 
 import java.util.ArrayList;
 import java.util.List;

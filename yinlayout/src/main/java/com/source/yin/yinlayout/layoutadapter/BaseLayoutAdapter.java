@@ -1,4 +1,4 @@
-package com.source.yin.yinlayout;
+package com.source.yin.yinlayout.layoutadapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

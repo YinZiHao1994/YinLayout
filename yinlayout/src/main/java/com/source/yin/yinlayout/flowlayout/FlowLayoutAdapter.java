@@ -2,7 +2,7 @@ package com.source.yin.yinlayout.flowlayout;
 
 import android.content.Context;
 
-import com.source.yin.yinlayout.BaseLayoutAdapter;
+import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
 
 import java.util.List;
 

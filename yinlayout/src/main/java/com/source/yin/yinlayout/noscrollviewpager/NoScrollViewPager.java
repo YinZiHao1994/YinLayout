@@ -1,4 +1,4 @@
-package com.source.yin.yinlayout;
+package com.source.yin.yinlayout.noscrollviewpager;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

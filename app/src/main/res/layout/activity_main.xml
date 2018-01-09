@@ -26,4 +26,10 @@
         android:layout_height="wrap_content"
         android:text="MoonMenu" />
 
+    <Button
+        android:id="@+id/btn_side_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SideMenu" />
+
 </LinearLayout>

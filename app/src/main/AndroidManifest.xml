@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".CheckableGroupSampleActivity" />
         <activity android:name=".FlowLayoutSampleActivity" />
-        <activity android:name=".MoonMenuActivity"></activity>
+        <activity android:name=".MoonMenuActivity" />
+        <activity android:name=".SideMenuActivity"></activity>
     </application>
 
 </manifest>

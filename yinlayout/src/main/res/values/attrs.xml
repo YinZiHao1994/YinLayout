@@ -20,4 +20,10 @@
         <attr name="total_angle" />
     </declare-styleable>
 
+
+    <declare-styleable name="SideMenuLayout">
+        <attr name="menu_trigger" format="float" />
+        <attr name="click_event_range" format="integer" />
+    </declare-styleable>
+
 </resources>
