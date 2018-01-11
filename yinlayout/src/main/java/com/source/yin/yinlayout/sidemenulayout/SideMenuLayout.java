@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -76,12 +77,13 @@ public class SideMenuLayout extends FrameLayout {
         viewDragHelper = ViewDragHelper.create(this, new ViewDragHelper.Callback() {
             @Override
             public boolean tryCaptureView(View child, int pointerId) {
+                Log.d("yzh", "child = " + child.getId());
                 return true;
             }
 
             @Override
             public int clampViewPositionHorizontal(View child, int left, int dx) {
-//                Log.d("yzh", "left = " + left + "\ndx = " + dx);
+                Log.d("yzh", "left = " + left + "\ndx = " + dx);
                 if (left > 0) {
                     return 0;
                 } else if (left < -totalMenuWidth) {

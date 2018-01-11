@@ -32,4 +32,10 @@
         android:layout_height="wrap_content"
         android:text="SideMenu" />
 
+    <Button
+        android:id="@+id/btn_flip_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="flipView" />
+
 </LinearLayout>
