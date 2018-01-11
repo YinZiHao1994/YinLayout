@@ -89,14 +89,6 @@ public class FlipView extends ViewFlipper implements LayoutByAdapterAble, BaseLa
         startFlipping();
     }
 
-    public BaseLayoutAdapter getBaseLayoutAdapter() {
-        return baseLayoutAdapter;
-    }
-
-    public void setBaseLayoutAdapter(BaseLayoutAdapter baseLayoutAdapter) {
-        this.baseLayoutAdapter = baseLayoutAdapter;
-    }
-
     public int getInterval() {
         return interval;
     }
