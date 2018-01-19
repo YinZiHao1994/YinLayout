@@ -65,7 +65,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
             }
         });
 
-
+        commonCheckableGroupUseAdapter.checkItem(2);
         commonCheckableGroupUseAdapterHorizontal.setLayoutAdapter(new BaseLayoutAdapter<String>(getApplicationContext(), stringList, R.layout.checkable_group_layout_item_horizontal) {
             @Override
             public void dataBind(View itemView, int position, String data) {
@@ -73,6 +73,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
                 textView.setText(data);
             }
         });
+        commonCheckableGroupUseAdapterHorizontal.checkItem(1);
     }
 
     private void initCommonCheckableGroup() {
@@ -82,15 +83,19 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
                 showChecked();
             }
         });
+
+        commonCheckableGroup.checkItem(0);
     }
 
     private void showChecked() {
         List<Checkable> checkedItemList = commonCheckableGroup.getCheckedItemList();
         StringBuilder text = new StringBuilder();
-        for (Checkable checkable : checkedItemList) {
-            ViewGroup viewGroup = (ViewGroup) checkable;
-            TextView textView = (TextView) ((ViewGroup) viewGroup.getChildAt(0)).getChildAt(0);
-            text.append(textView.getText().toString());
+        if (checkedItemList != null) {
+            for (Checkable checkable : checkedItemList) {
+                ViewGroup viewGroup = (ViewGroup) checkable;
+                TextView textView = (TextView) ((ViewGroup) viewGroup.getChildAt(0)).getChildAt(0);
+                text.append(textView.getText().toString());
+            }
         }
         tvChecked.setText(text);
     }
@@ -98,10 +103,12 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
     private void showCheckedUseAdapter() {
         List<Checkable> checkedItemList = commonCheckableGroupUseAdapter.getCheckedItemList();
         StringBuilder text = new StringBuilder();
-        for (Checkable checkable : checkedItemList) {
-            ViewGroup viewGroup = (ViewGroup) checkable;
-            TextView textView = (TextView) (viewGroup.getChildAt(0));
-            text.append(textView.getText().toString());
+        if (checkedItemList != null) {
+            for (Checkable checkable : checkedItemList) {
+                ViewGroup viewGroup = (ViewGroup) checkable;
+                TextView textView = (TextView) (viewGroup.getChildAt(0));
+                text.append(textView.getText().toString());
+            }
         }
         tvCheckedUseAdapter.setText(text);
     }

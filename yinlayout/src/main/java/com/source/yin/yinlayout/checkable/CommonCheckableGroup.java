@@ -4,15 +4,16 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
 
+import com.source.yin.yinlayout.R;
 import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
 import com.source.yin.yinlayout.layoutadapter.LayoutByAdapterAble;
-import com.source.yin.yinlayout.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by yin on 2017/12/12.
  */
 
-public class CommonCheckableGroup extends LinearLayout implements View.OnClickListener, BaseLayoutAdapter.DataChangeListener, LayoutByAdapterAble {
+public class CommonCheckableGroup extends LinearLayout implements View.OnClickListener, BaseLayoutAdapter.DataChangeListener, LayoutByAdapterAble, CheckableGroup {
 
     //是否能多选
     private boolean isMultiple;
@@ -76,16 +77,20 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     public void onClick(View v) {
         if (v instanceof Checkable) {
             Checkable checkableView = (Checkable) v;
-            if (!isMultiple) {
-                for (Checkable checkable : checkableList) {
-                    if (checkable != checkableView) {
-                        changeCheckedState(checkable, false);
-                    }
+            dealWithCheckEvent(checkableView, !checkableView.isChecked());
+        }
+    }
+
+    private void dealWithCheckEvent(Checkable targetCheckable, boolean isCheck) {
+        if (!isMultiple) {
+            for (Checkable checkable : checkableList) {
+                if (checkable != targetCheckable) {
+                    changeCheckedState(checkable, false);
                 }
-                changeCheckedState(checkableView, true);
-            } else {
-                changeCheckedState(checkableView, !checkableView.isChecked());
             }
+            changeCheckedState(targetCheckable, true);
+        } else {
+            changeCheckedState(targetCheckable, isCheck);
         }
     }
 
@@ -116,6 +121,7 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
         }
     }
 
+    @Override
     public List<Checkable> getCheckedItemList() {
         List<Checkable> checkedItemList = null;
         if (checkableList != null && checkableList.size() > 0) {
@@ -127,6 +133,36 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
             }
         }
         return checkedItemList;
+    }
+
+    @Override
+    public List<Checkable> getCheckableList() {
+        return checkableList;
+    }
+
+    @Override
+    public void checkItem(int position) {
+        // todo 在 activity 的 onCreate 和 onResume 中调用此方法时，如果通过如下实现， checkableList 总是为空列表。待解决
+        /*if (checkableList != null) {
+            if (checkableList.size() > position) {
+                Checkable checkable = checkableList.get(position);
+                dealWithCheckEvent(checkable, true);
+            } else {
+                throw new RuntimeException("传入的位置 : " + position + " 超出可选中的总数量 :" + checkableList.size());
+            }
+        }*/
+
+        int childCount = getChildCount();
+        if (position >= childCount) {
+            throw new RuntimeException("传入的位置 : " + position + " 超出子 view 的总数量 :" + childCount);
+        }
+        View childView = getChildAt(position);
+        if (childView instanceof Checkable) {
+            dealWithCheckEvent((Checkable) childView, true);
+        } else {
+            Log.e(getClass().getName(), "position " + position + " 位置的 view 不是 Checkable 的");
+        }
+
     }
 
     public CheckedListener getCheckedListener() {

@@ -73,6 +73,7 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
             }
         });
 
+        checkableGroupFlowLayout.checkItem(4);
 
         checkableGroupFlowLayoutMultiple.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item2) {
             @Override
@@ -84,10 +85,12 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
         checkableGroupFlowLayoutMultiple.setOnChildViewCheckListener(new CheckableGroupFlowLayout.OnChildViewCheckListener() {
             @Override
             public void onChildViewCheckedStateChanged(Checkable checkable) {
-                List<Checkable> haveCheckedList = checkableGroupFlowLayoutMultiple.getHaveCheckedList();
+                List<Checkable> haveCheckedList = checkableGroupFlowLayoutMultiple.getCheckedItemList();
                 tvCheckedNum.setText(String.valueOf(haveCheckedList.size()));
             }
         });
+
+        checkableGroupFlowLayoutMultiple.checkItem(2);
     }
 
     private void initFlowLayout() {

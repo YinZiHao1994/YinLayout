@@ -3,12 +3,14 @@ package com.source.yin.yinlayout.flowlayout;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Checkable;
 
-import com.source.yin.yinlayout.checkable.CheckableTag;
 import com.source.yin.yinlayout.R;
+import com.source.yin.yinlayout.checkable.CheckableGroup;
+import com.source.yin.yinlayout.checkable.CheckableTag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
  * Created by yin on 2017/11/3.
  */
 
-public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClickListener {
+public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClickListener, CheckableGroup {
 
     private List<Checkable> checkableList = new ArrayList<>();
     private OnChildViewCheckListener onChildViewCheckListener;
@@ -67,17 +69,21 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
     public void onClick(View v) {
         if (v instanceof Checkable) {
             Checkable chooseCheckable = (Checkable) v;
-            if (!isMultiple) {
-                for (Checkable checkable : checkableList) {
-                    if (checkable != chooseCheckable) {
-                        if (checkable.isChecked()) {
-                            changeCheckedState(checkable, false);
-                        }
+            dealWithCheckEvent(chooseCheckable, !chooseCheckable.isChecked());
+        }
+    }
+
+    private void dealWithCheckEvent(Checkable targetCheckable, boolean isCheck) {
+        if (!isMultiple) {
+            for (Checkable checkable : checkableList) {
+                if (checkable != targetCheckable) {
+                    if (checkable.isChecked()) {
+                        changeCheckedState(checkable, false);
                     }
                 }
             }
-            changeCheckedState(chooseCheckable, !chooseCheckable.isChecked());
         }
+        changeCheckedState(targetCheckable, isCheck);
     }
 
 
@@ -116,7 +122,8 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
     }
 
 
-    public List<Checkable> getHaveCheckedList() {
+    @Override
+    public List<Checkable> getCheckedItemList() {
         List<Checkable> haveCheckedList = new ArrayList<>();
         for (Checkable checkable : checkableList) {
             if (checkable.isChecked()) {
@@ -124,6 +131,34 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
             }
         }
         return haveCheckedList;
+    }
+
+    @Override
+    public List<Checkable> getCheckableList() {
+        return checkableList;
+    }
+
+    @Override
+    public void checkItem(int position) {
+        // todo 在 activity 的 onCreate 和 onResume 中调用此方法时，如果通过如下实现， checkableList 总是为空列表。待解决
+        /*if (checkableList != null) {
+            if (checkableList.size() > position) {
+                dealWithCheckEvent(checkableList.get(position), true);
+            } else {
+                throw new RuntimeException("传入的位置 : " + position + " 超出可选中的总数量 :" + checkableList.size());
+            }
+        }*/
+
+        int childCount = getChildCount();
+        if (position >= childCount) {
+            throw new RuntimeException("传入的位置 : " + position + " 超出子 view 的总数量 :" + childCount);
+        }
+        View childView = getChildAt(position);
+        if (childView instanceof Checkable) {
+            dealWithCheckEvent((Checkable) childView, true);
+        } else {
+            Log.e(getClass().getName(), "position " + position + " 位置的 view 不是 Checkable 的");
+        }
     }
 
 
