@@ -11,6 +11,7 @@ import android.widget.Checkable;
 import com.source.yin.yinlayout.R;
 import com.source.yin.yinlayout.checkable.CheckableGroup;
 import com.source.yin.yinlayout.checkable.CheckableTag;
+import com.source.yin.yinlayout.checkable.OnItemCheckListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
 public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClickListener, CheckableGroup {
 
     private List<Checkable> checkableList = new ArrayList<>();
-    private OnChildViewCheckListener onChildViewCheckListener;
+    private OnItemCheckListener onItemCheckListener;
     //是否能多选
     private boolean isMultiple;
 
@@ -90,8 +91,8 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
     private void changeCheckedState(Checkable checkable, boolean isChecked) {
         if (checkable != null) {
             checkable.setChecked(isChecked);
-            if (onChildViewCheckListener != null) {
-                onChildViewCheckListener.onChildViewCheckedStateChanged(checkable);
+            if (onItemCheckListener != null) {
+                onItemCheckListener.onCheckedStateChange(checkable);
             }
             if (checkable instanceof ViewGroup) {
                 changeChildCheckState((ViewGroup) checkable, isChecked);
@@ -161,16 +162,10 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
         }
     }
 
-
-    public interface OnChildViewCheckListener {
-        void onChildViewCheckedStateChanged(Checkable checkable);
+    @Override
+    public void setOnItemCheckListener(OnItemCheckListener onItemCheckListener) {
+        this.onItemCheckListener = onItemCheckListener;
     }
 
-    public OnChildViewCheckListener getOnChildViewCheckListener() {
-        return onChildViewCheckListener;
-    }
 
-    public void setOnChildViewCheckListener(OnChildViewCheckListener onChildViewCheckListener) {
-        this.onChildViewCheckListener = onChildViewCheckListener;
-    }
 }

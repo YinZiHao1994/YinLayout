@@ -8,6 +8,7 @@ import android.widget.Checkable;
 import android.widget.TextView;
 
 import com.source.yin.yinlayout.checkable.CheckableTag;
+import com.source.yin.yinlayout.checkable.OnItemCheckListener;
 import com.source.yin.yinlayout.flowlayout.CheckableGroupFlowLayout;
 import com.source.yin.yinlayout.flowlayout.FlowLayout;
 import com.source.yin.yinlayout.flowlayout.FlowLayoutAdapter;
@@ -59,9 +60,9 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
                 textView.setText(data);
             }
         });
-        checkableGroupFlowLayout.setOnChildViewCheckListener(new CheckableGroupFlowLayout.OnChildViewCheckListener() {
+        checkableGroupFlowLayout.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onChildViewCheckedStateChanged(Checkable checkable) {
+            public void onCheckedStateChange(Checkable checkable) {
                 if (checkable instanceof CheckableTag) {
                     CheckableTag checkableTag = (CheckableTag) checkable;
                     View child = checkableTag.getChildAt(0);
@@ -82,9 +83,9 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
                 textView.setText(data);
             }
         });
-        checkableGroupFlowLayoutMultiple.setOnChildViewCheckListener(new CheckableGroupFlowLayout.OnChildViewCheckListener() {
+        checkableGroupFlowLayoutMultiple.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onChildViewCheckedStateChanged(Checkable checkable) {
+            public void onCheckedStateChange(Checkable checkable) {
                 List<Checkable> haveCheckedList = checkableGroupFlowLayoutMultiple.getCheckedItemList();
                 tvCheckedNum.setText(String.valueOf(haveCheckedList.size()));
             }

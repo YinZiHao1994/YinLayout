@@ -29,7 +29,7 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     //是否能多选
     private boolean isMultiple;
     private List<Checkable> checkableList = new ArrayList<>();
-    private CheckedListener checkedListener;
+    private OnItemCheckListener onItemCheckListener;
 
     private BaseLayoutAdapter adapter;
     private Context context;
@@ -100,8 +100,8 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
             if (checkable instanceof ViewGroup) {
                 changeChildCheckState((ViewGroup) checkable, isChecked);
             }
-            if (checkedListener != null) {
-                checkedListener.onCheckChange(checkable);
+            if (onItemCheckListener != null) {
+                onItemCheckListener.onCheckedStateChange(checkable);
             }
         }
     }
@@ -165,12 +165,9 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
 
     }
 
-    public CheckedListener getCheckedListener() {
-        return checkedListener;
-    }
-
-    public void setCheckedListener(CheckedListener checkedListener) {
-        this.checkedListener = checkedListener;
+    @Override
+    public void setOnItemCheckListener(OnItemCheckListener onItemCheckListener) {
+        this.onItemCheckListener = onItemCheckListener;
     }
 
     @Override
@@ -202,11 +199,4 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     }
 
 
-    public interface CheckedListener {
-
-        void onCheckChange(Checkable checkable);
-//        void itemCheck(Checkable view);
-
-//        void itemUnCheck(Checkable view);
-    }
 }

@@ -31,4 +31,9 @@ public interface CheckableGroup {
      * @param position 子 view 列表中的第几项，注意，从0开始
      */
     void checkItem(int position);
+
+    /**
+     * 设置选项被选中状态改变监听器
+     */
+    void setOnItemCheckListener(OnItemCheckListener onItemCheckListener);
 }

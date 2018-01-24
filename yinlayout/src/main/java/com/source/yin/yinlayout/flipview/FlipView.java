@@ -95,6 +95,7 @@ public class FlipView extends ViewFlipper implements LayoutByAdapterAble, BaseLa
 
     public void setInterval(int interval) {
         this.interval = interval;
+        setFlipInterval(interval);
     }
 
     public AnimDirection getAnimDirection() {

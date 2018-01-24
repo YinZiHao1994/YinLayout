@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 标签布局
+ * 流式布局
  * Created by Yin on 2017/10/25.
  */
 public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChangeListener, LayoutByAdapterAble<FlowLayoutAdapter> {

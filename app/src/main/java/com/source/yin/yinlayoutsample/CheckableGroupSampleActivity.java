@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import com.source.yin.yinlayout.checkable.OnItemCheckListener;
 import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
 import com.source.yin.yinlayout.checkable.CommonCheckableGroup;
 
@@ -58,9 +59,9 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
             }
         });
 
-        commonCheckableGroupUseAdapter.setCheckedListener(new CommonCheckableGroup.CheckedListener() {
+        commonCheckableGroupUseAdapter.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckChange(Checkable checkable) {
+            public void onCheckedStateChange(Checkable checkable) {
                 showCheckedUseAdapter();
             }
         });
@@ -77,9 +78,9 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
     }
 
     private void initCommonCheckableGroup() {
-        commonCheckableGroup.setCheckedListener(new CommonCheckableGroup.CheckedListener() {
+        commonCheckableGroup.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckChange(Checkable checkable) {
+            public void onCheckedStateChange(Checkable checkable) {
                 showChecked();
             }
         });
@@ -92,9 +93,17 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
         StringBuilder text = new StringBuilder();
         if (checkedItemList != null) {
             for (Checkable checkable : checkedItemList) {
-                ViewGroup viewGroup = (ViewGroup) checkable;
-                TextView textView = (TextView) ((ViewGroup) viewGroup.getChildAt(0)).getChildAt(0);
-                text.append(textView.getText().toString());
+                if (checkable instanceof TextView) {
+                    String s = ((TextView) checkable).getText().toString();
+                    text.append(s);
+                } else if (checkable instanceof ViewGroup) {
+                    ViewGroup viewGroup = (ViewGroup) checkable;
+                    View view = viewGroup.getChildAt(0);
+                    if (view instanceof TextView) {
+                        String s = ((TextView) view).getText().toString();
+                        text.append(s);
+                    }
+                }
             }
         }
         tvChecked.setText(text);

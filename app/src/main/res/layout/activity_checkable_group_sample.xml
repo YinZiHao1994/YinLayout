@@ -22,42 +22,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.source.yin.yinlayout.checkable.CheckableTag
+            <CheckedTextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <CheckedTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/background_selector"
-                        android:padding="10dp"
-                        android:text="选项1"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-
-            </com.source.yin.yinlayout.checkable.CheckableTag>
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_selector"
+                android:padding="10dp"
+                android:text="选项1"
+                android:textColor="@android:color/white" />
 
             <com.source.yin.yinlayout.checkable.CheckableTag
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/background_selector">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <CheckedTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/background_selector"
-                        android:padding="10dp"
-                        android:text="选项2"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="选项2"
+                    android:textColor="@android:color/white" />
 
             </com.source.yin.yinlayout.checkable.CheckableTag>
         </com.source.yin.yinlayout.checkable.CommonCheckableGroup>
@@ -90,6 +74,7 @@
             android:id="@+id/common_checkable_group_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:multiple="true"
             android:orientation="horizontal">
 
             <com.source.yin.yinlayout.checkable.CheckableTag
