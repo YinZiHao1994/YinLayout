@@ -31,7 +31,7 @@ public class SideMenuActivity extends AppCompatActivity {
     private void initAdapter() {
         List<String> dataList = new ArrayList<>();
         for (int i = 100000; i < 100100; i++) {
-            dataList.add(String.valueOf(i*i));
+            dataList.add(String.valueOf(i * i));
 
         }
         SideMenuAdapter<String> stringSideMenuAdapter = new SideMenuAdapter<>(dataList);
@@ -51,26 +51,33 @@ public class SideMenuActivity extends AppCompatActivity {
 
         @Override
         public SideMenuAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View inflate = LayoutInflater.from(getApplicationContext()).inflate(R.layout.side_menu_item, parent,false);
+            View inflate = LayoutInflater.from(getApplicationContext()).inflate(R.layout.side_menu_item, parent, false);
             return new MyViewHolder(inflate);
         }
 
         @Override
         public void onBindViewHolder(SideMenuAdapter.MyViewHolder holder, int position) {
-            holder.getTvContent().setText((String) dataList.get(position));
+            TextView tvContent = holder.getTvContent();
+            tvContent.setText((String) dataList.get(position));
+            tvContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), "clickContent", Toast.LENGTH_SHORT).show();
+                }
+            });
             SideMenuLayout sideMenuLayout = holder.getSideMenuLayout();
             sideMenuLayout.setOnMenuClickListener(new SideMenuLayout.OnMenuClickListener() {
                 @Override
                 public void onMenuClickListener(View view) {
-                    Toast.makeText(getApplicationContext(),"click : "+view.getId(),Toast.LENGTH_SHORT).show();
+                    if (view instanceof TextView) {
+                        String s = ((TextView) view).getText().toString();
+                        Toast.makeText(getApplicationContext(), "click menu : " + s, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "click : " + view.getId(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
-
-//        @Override
-//        public void onBindViewHolder(MyViewHolder holder, int position) {
-//            holder.getTvContent().setText((String) dataList.get(position));
-//        }
 
 
         @Override

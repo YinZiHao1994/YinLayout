@@ -22,10 +22,12 @@ public class FlipView extends ViewFlipper implements LayoutByAdapterAble, BaseLa
 
 
     private BaseLayoutAdapter baseLayoutAdapter;
+    //动画时长
     private int interval = 3000;
+    //动画切换方向
+    private AnimDirection animDirection = AnimDirection.VERTICAL;
     private Context context;
     private OnItemClick onItemClick;
-    private AnimDirection animDirection = AnimDirection.VERTICAL;
 
 
     public enum AnimDirection {

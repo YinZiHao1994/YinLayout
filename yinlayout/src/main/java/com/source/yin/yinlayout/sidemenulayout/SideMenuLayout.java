@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,7 +23,7 @@ public class SideMenuLayout extends FrameLayout {
 
     private ViewDragHelper viewDragHelper;
     private int menuStartLeft;
-    private int totalMenuWidth;
+    private int totalRightMenuWidth;
     private OnMenuClickListener onMenuClickListener;
 
     //触发菜单打开的比例，比如当用户划开菜单总长度的0.3之后松手菜单自动继续打开
@@ -35,7 +34,6 @@ public class SideMenuLayout extends FrameLayout {
     //内容
     private View contentView;
     //菜单
-//    private View menu;
     private List<View> menuList;
 
     private MenuState menuState = MenuState.close;
@@ -77,19 +75,34 @@ public class SideMenuLayout extends FrameLayout {
         viewDragHelper = ViewDragHelper.create(this, new ViewDragHelper.Callback() {
             @Override
             public boolean tryCaptureView(View child, int pointerId) {
-                Log.d("yzh", "child = " + child.getId());
+//                Log.d("yzh", "child = " + child.getId());
+//                return child == contentView;
                 return true;
             }
 
             @Override
             public int clampViewPositionHorizontal(View child, int left, int dx) {
-                Log.d("yzh", "left = " + left + "\ndx = " + dx);
-                if (left > 0) {
-                    return 0;
-                } else if (left < -totalMenuWidth) {
-                    return -totalMenuWidth;
+//                Log.d("yzh", "clampViewPositionHorizontal " + "left = " + left + "\tdx = " + dx);
+
+                if (child == contentView) {
+                    //内容栏的 x 坐标不能超过0，不能超出屏幕左边界全部菜单的宽度和
+                    if (left > 0) {
+                        return 0;
+                    } else if (left < -totalRightMenuWidth) {
+                        return -totalRightMenuWidth;
+                    }
                 }
                 return left;
+            }
+
+            @Override
+            public int getViewHorizontalDragRange(View child) {
+                return totalRightMenuWidth;
+            }
+
+            @Override
+            public int getViewVerticalDragRange(View child) {
+                return super.getViewVerticalDragRange(child);
             }
 
             @Override
@@ -100,9 +113,13 @@ public class SideMenuLayout extends FrameLayout {
             @Override
             public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
                 super.onViewPositionChanged(changedView, left, top, dx, dy);
-                if (changedView == contentView) {
-                    for (View menuView : menuList) {
-                        menuView.offsetLeftAndRight(dx);
+//                Log.d("yzh", "onViewPositionChanged " + "left = " + left + "\tdx = " + dx);
+                SideMenuLayout sideMenuLayout = SideMenuLayout.this;
+                int childCount = sideMenuLayout.getChildCount();
+                for (int i = 0; i < childCount; i++) {
+                    View childView = sideMenuLayout.getChildAt(i);
+                    if (childView != changedView) {
+                        childView.offsetLeftAndRight(dx);
                     }
                 }
                 invalidate();
@@ -117,7 +134,7 @@ public class SideMenuLayout extends FrameLayout {
                     open();
                 } else if (xvel > 0) {
                     close();
-                } else if (menuState == MenuState.close && menuStartLeft - firstMenuView.getLeft() > totalMenuWidth * menuTrigger) {
+                } else if (menuState == MenuState.close && menuStartLeft - firstMenuView.getLeft() > totalRightMenuWidth * menuTrigger) {
                     open();
                 } else {
                     close();
@@ -137,7 +154,7 @@ public class SideMenuLayout extends FrameLayout {
     }
 
     private void open() {
-        if (viewDragHelper.smoothSlideViewTo(contentView, 0 - totalMenuWidth, 0)) {
+        if (viewDragHelper.smoothSlideViewTo(contentView, 0 - totalRightMenuWidth, 0)) {
 //            viewDragHelper.continueSettling(true);
             ViewCompat.postInvalidateOnAnimation(this);
         }
@@ -218,15 +235,15 @@ public class SideMenuLayout extends FrameLayout {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-//        Log.d("yzh", "left = " + left + "\ttop = " + top + "\tright = " + right + "\tbottom = " + bottom);
+//        Log.d("yzh", "menuStartLeft = " + menuStartLeft + "\tleft = " + left + "\ttop = " + top + "\tright = " + right + "\tbottom = " + bottom);
         if (contentView != null) {
             menuStartLeft = contentView.getMeasuredWidth();
         }
 
-        totalMenuWidth = 0;
+        totalRightMenuWidth = 0;
         for (View menuView : menuList) {
-            menuView.layout(menuStartLeft + totalMenuWidth, 0, menuStartLeft + totalMenuWidth + menuView.getMeasuredWidth(), menuView.getBottom());
-            totalMenuWidth += menuView.getMeasuredWidth();
+            menuView.layout(menuStartLeft + totalRightMenuWidth, 0, menuStartLeft + totalRightMenuWidth + menuView.getMeasuredWidth(), menuView.getBottom());
+            totalRightMenuWidth += menuView.getMeasuredWidth();
         }
 
     }

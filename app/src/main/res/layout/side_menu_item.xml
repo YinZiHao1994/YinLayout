@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
-    android:background="@android:color/holo_green_dark"
-    app:menu_trigger="0.1">
+    android:background="@android:color/holo_green_dark">
 
     <TextView
         android:id="@+id/tv_content"
@@ -27,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_red_light"
-        android:text="menu2"
+        android:text="other_menu"
         android:textColor="@android:color/white"
         android:textSize="40sp" />
 

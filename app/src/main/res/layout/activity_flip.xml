@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context="com.source.yin.yinlayoutsample.FlipActivity">
 
     <com.source.yin.yinlayout.flipview.FlipView
@@ -12,8 +13,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+
     <com.source.yin.yinlayout.flipview.FlipView
         android:id="@+id/flip_view_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/radio_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="横向动画" />
+
+        <RadioButton
+            android:id="@+id/radio_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="纵向动画" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="动画时长" />
+
+        <SeekBar
+            android:id="@+id/seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="5" />
+    </LinearLayout>
 </LinearLayout>

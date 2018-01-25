@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,9 @@ public class FlipActivity extends AppCompatActivity {
     private FlipView flipViewText;
     private FlipView flipViewImage;
 
+    private SeekBar seekBar;
+    private RadioGroup radioGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +31,62 @@ public class FlipActivity extends AppCompatActivity {
 
         flipViewText = findViewById(R.id.flip_view_text);
         flipViewImage = findViewById(R.id.flip_view_image);
-
+        seekBar = findViewById(R.id.seek_bar);
+        radioGroup = findViewById(R.id.radio_group);
 
         initFlipText();
         initFlipImage();
+
+        int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+        changeAnimDirection(checkedRadioButtonId);
+
+        seekBar.setProgress(2);
+        changeSetInterval(seekBar.getProgress());
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                changeSetInterval(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                changeAnimDirection(checkedId);
+            }
+        });
+    }
+
+    private void changeSetInterval(int progress) {
+        if (progress < 1) {
+            progress = 1;
+        }
+        int second = progress * 1000;
+        flipViewText.setInterval(second);
+        flipViewImage.setInterval(second);
+    }
+
+    private void changeAnimDirection(int checkedRadioButtonId) {
+        switch (checkedRadioButtonId) {
+            case R.id.radio_horizontal:
+                flipViewImage.setAnimDirection(FlipView.AnimDirection.HORIZONTAL);
+                flipViewText.setAnimDirection(FlipView.AnimDirection.HORIZONTAL);
+                break;
+            case R.id.radio_vertical:
+                flipViewImage.setAnimDirection(FlipView.AnimDirection.VERTICAL);
+                flipViewText.setAnimDirection(FlipView.AnimDirection.VERTICAL);
+                break;
+        }
     }
 
     private void initFlipImage() {
@@ -50,7 +107,6 @@ public class FlipActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "image item : " + itemPosition, Toast.LENGTH_SHORT).show();
             }
         });
-        flipViewImage.setAnimDirection(FlipView.AnimDirection.HORIZONTAL);
     }
 
     private void initFlipText() {
