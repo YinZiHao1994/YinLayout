@@ -72,8 +72,8 @@ public class MoonMenu extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        measureChildren(widthMeasureSpec, heightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
@@ -144,11 +144,12 @@ public class MoonMenu extends ViewGroup {
         }
 
 
-        Drawable backgroundDrawable = context.getResources().getDrawable(R.drawable.shape_dim);
+//        Drawable backgroundDrawable = context.getResources().getDrawable(R.drawable.shape_dim);
 //        Resources resources = context.getResources();
 //        Bitmap bitmap = BitmapFactory.decodeResource(resources, R.drawable.shape_dim);
 //        BitmapDrawable foregroundBitmapDrawable = new BitmapDrawable(resources, bitmap);
-        setBackground(backgroundDrawable);
+//        setBackground(backgroundDrawable);
+        setBackgroundResource(R.drawable.shape_dim);
         Drawable background = getBackground();
         if (background != null) {
             //初始化的时候背景设置为透明，否则为全黑的前景色

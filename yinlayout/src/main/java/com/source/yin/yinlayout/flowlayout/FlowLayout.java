@@ -36,6 +36,7 @@ public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChang
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
 
         /*onMeasure()方法会执行多次，每次执行先清空List防止多次叠加出错*/
         childViewNumOfEachRow.clear();
@@ -57,10 +58,8 @@ public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChang
         int count = getChildCount();
 //        每一行的子View数目
         int childNumOfLine = 0;
-
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
-            measureChild(child, widthMeasureSpec, heightMeasureSpec);
             LayoutParams layoutParams = child.getLayoutParams();
             int leftMargin = 0;
             int rightMargin = 0;
