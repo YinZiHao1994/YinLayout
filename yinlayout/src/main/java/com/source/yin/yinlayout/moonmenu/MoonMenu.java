@@ -155,7 +155,6 @@ public class MoonMenu extends ViewGroup {
             //初始化的时候背景设置为透明，否则为全黑的前景色
             background.setAlpha(0);
         }
-
     }
 
     public void setOnMenuItemClickListener(OnMenuItemClickListener onMenuItemClickListener) {

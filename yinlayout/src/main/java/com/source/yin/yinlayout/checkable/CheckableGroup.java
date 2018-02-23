@@ -5,6 +5,7 @@ import android.widget.Checkable;
 import java.util.List;
 
 /**
+ * 子 view 可被选中的 viewGroup 的统一接口
  * Created by yin on 2018/1/18.
  */
 
@@ -13,12 +14,12 @@ public interface CheckableGroup {
     /**
      * 返回处于被选中状态的对象的列表
      *
-     * @return
+     * @return 处于被选中状态的对象的列表
      */
     List<Checkable> getCheckedItemList();
 
     /**
-     * 返回 Checkable 对象的列表
+     * 返回此父布局直接包含的 Checkable 对象的列表
      *
      * @return
      */
