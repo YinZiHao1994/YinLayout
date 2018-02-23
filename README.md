@@ -74,7 +74,7 @@ xml 中设置 `multiple` 属性为 `ture` 则表示可多选。
 ## FlowLayout
 流式布局。子 `view` 将横向依次填满布局的每一行。
 
-`FlowLayout` 与 `CommonCheckableGroup` 类似，都可在 xml 中直接使用或在代码中通过 adapter 方式动态使用。事实上，它们都实现了 [LayoutByAdapterAble](#LayoutByAdapterAble) 接口，所以符合同样的 adapter 实现规范。
+`FlowLayout` 与 `CommonCheckableGroup` 类似，都可在 xml 中直接使用或在代码中通过 adapter 方式动态使用。事实上，它们都实现了 [LayoutByAdapterAble](#layoutbyadapterable) 接口，所以符合同样的 adapter 实现规范。
 
 ## CheckableGroupFlowLayout
 用于选择标签的流式布局。继承了 `FlowLayout`，所以显示样式与 `FlowLayout` 相同。同时与 `CommonCheckableGroup` 一样实现了 [CheckableGroup](#checkablegroup) 接口，所以同样可通过 `setOnItemCheckListener()` 设置选项状态改变监听和通过 `getCheckedItemList()` 获取当前选中项的列表。
