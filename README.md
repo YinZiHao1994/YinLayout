@@ -132,5 +132,5 @@ xml 中设置 `multiple` 属性为 `ture` 则表示可多选。
 ## <span id="CheckableGroup">CheckableGroup</span>
 子 view 可被选中的 viewGroup 的统一接口
 
-## <span id="LayoutByAdapterAble">LayoutByAdapterAble </span>
+## <span id="LayoutByAdapterAble">LayoutByAdapterAble</span>
 可使用 adapter 方式实现数据管理的布局统一实现的接口
