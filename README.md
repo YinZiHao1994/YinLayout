@@ -130,5 +130,7 @@ xml 中设置 `multiple` 属性为 `ture` 则表示可多选。
 ![side_menu](https://github.com/YinZiHao1994/YinLayout/blob/master/app/src/main/res/drawable/side_menu.gif)
 
 ## <span id="CheckableGroup">CheckableGroup</span>
+子 view 可被选中的 viewGroup 的统一接口
 
-## LayoutByAdapterAble <span id="LayoutByAdapterAble"/>
+## <span id="LayoutByAdapterAble">LayoutByAdapterAble </span>
+可使用 adapter 方式实现数据管理的布局统一实现的接口
