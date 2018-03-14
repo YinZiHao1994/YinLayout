@@ -39,9 +39,7 @@ public interface CheckableGroup {
     void setOnItemCheckListener(OnItemCheckListener onItemCheckListener);
 
     /**
-     * 返回带列表位置的 Checkable 包装对象，用来在之后根据列表位置值获取数据源对象
-     *
-     * @return 带列表位置的 Checkable 包装对象
+     * 返回被选中项在列表中的位置的集合
      */
-    List<CheckableItemWrapper> getCheckedCheckableItemWrapperList();
+    List<Integer> getCheckedItemPositionList();
 }

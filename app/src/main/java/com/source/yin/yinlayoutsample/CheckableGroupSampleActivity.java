@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.TextView;
 
-import com.source.yin.yinlayout.checkable.CheckableItemWrapper;
 import com.source.yin.yinlayout.checkable.CommonCheckableGroup;
 import com.source.yin.yinlayout.checkable.OnItemCheckListener;
 import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
@@ -111,15 +110,15 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
     }
 
     private void showCheckedUseAdapter() {
-        List<CheckableItemWrapper> checkedCheckableItemWrapperList = commonCheckableGroupUseAdapter.getCheckedCheckableItemWrapperList();
+        List<Integer> checkedItemPositionList = commonCheckableGroupUseAdapter.getCheckedItemPositionList();
         StringBuilder text = new StringBuilder();
-        if (checkedCheckableItemWrapperList != null) {
-            for (CheckableItemWrapper checkableItemWrapper : checkedCheckableItemWrapperList) {
-                Checkable checkable = checkableItemWrapper.getCheckable();
-                int positionInList = checkableItemWrapper.getPositionInList();
-                ViewGroup viewGroup = (ViewGroup) checkable;
-                TextView textView = (TextView) (viewGroup.getChildAt(0));
-                text.append("第 " + positionInList + " 项 : " + textView.getText().toString());
+        if (checkedItemPositionList != null) {
+            for (Integer position : checkedItemPositionList) {
+//                Checkable checkable = checkableItemWrapper.getCheckable();
+//                int positionInList = checkableItemWrapper.getPositionInList();
+//                ViewGroup viewGroup = (ViewGroup) checkable;
+//                TextView textView = (TextView) (viewGroup.getChildAt(0));
+                text.append("第 " + position + " 项 ");
             }
         }
         tvCheckedUseAdapter.setText(text);

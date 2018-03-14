@@ -137,14 +137,14 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
 
 
     @Override
-    public List<CheckableItemWrapper> getCheckedCheckableItemWrapperList() {
-        List<CheckableItemWrapper> checkableItemWrapperList = null;
+    public List<Integer> getCheckedItemPositionList() {
+        List<Integer> checkableItemWrapperList = null;
         if (checkableList != null && checkableList.size() > 0) {
             checkableItemWrapperList = new ArrayList<>();
             for (int i = 0; i < checkableList.size(); i++) {
                 Checkable checkable = checkableList.get(i);
                 if (checkable.isChecked()) {
-                    checkableItemWrapperList.add(new CheckableItemWrapper(i, checkable));
+                    checkableItemWrapperList.add(i);
                 }
             }
         }
