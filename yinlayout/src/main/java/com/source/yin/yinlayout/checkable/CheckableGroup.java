@@ -37,4 +37,11 @@ public interface CheckableGroup {
      * 设置选项被选中状态改变监听器
      */
     void setOnItemCheckListener(OnItemCheckListener onItemCheckListener);
+
+    /**
+     * 返回带列表位置的 Checkable 包装对象，用来在之后根据列表位置值获取数据源对象
+     *
+     * @return 带列表位置的 Checkable 包装对象
+     */
+    List<CheckableItemWrapper> getCheckedCheckableItemWrapperList();
 }

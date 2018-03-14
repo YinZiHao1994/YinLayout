@@ -8,10 +8,10 @@ android {
     buildToolsVersion "26.0.2"
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 26
-        versionCode 16
-        versionName "2.4.0"
+        versionCode 18
+        versionName "2.4.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -43,13 +43,7 @@ publish {
     userOrg = 'yinzihaoos'//bintray.com用户名
     groupId = 'com.yinzihao'//jcenter上的路径
     artifactId = 'YinLayout'//项目名称
-    publishVersion = '2.4.0'//版本号
+    publishVersion = '2.4.5'//版本号
     desc = '一个自定义布局库'//描述，不重要
     website = 'https://github.com/YinZiHao1994/YinLayout.git'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
-
-
-
-//把库上传到jcenter的命令
-//windows: gradlew clean build bintrayUpload   -PbintrayUser=xxx   -PbintrayKey=xxx   -PdryRun=false
-//osX:  ./gradlew clean build bintrayUpload   -PbintrayUser=yinzihaoos   -PbintrayKey=f3a9bd7e8eb569ee6aedadeee23813cdc6d57e06   -PdryRun=false

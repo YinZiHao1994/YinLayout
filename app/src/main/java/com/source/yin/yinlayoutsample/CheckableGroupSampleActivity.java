@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import com.source.yin.yinlayout.checkable.CheckableItemWrapper;
+import com.source.yin.yinlayout.checkable.CommonCheckableGroup;
 import com.source.yin.yinlayout.checkable.OnItemCheckListener;
 import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
-import com.source.yin.yinlayout.checkable.CommonCheckableGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,13 +111,15 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
     }
 
     private void showCheckedUseAdapter() {
-        List<Checkable> checkedItemList = commonCheckableGroupUseAdapter.getCheckedItemList();
+        List<CheckableItemWrapper> checkedCheckableItemWrapperList = commonCheckableGroupUseAdapter.getCheckedCheckableItemWrapperList();
         StringBuilder text = new StringBuilder();
-        if (checkedItemList != null) {
-            for (Checkable checkable : checkedItemList) {
+        if (checkedCheckableItemWrapperList != null) {
+            for (CheckableItemWrapper checkableItemWrapper : checkedCheckableItemWrapperList) {
+                Checkable checkable = checkableItemWrapper.getCheckable();
+                int positionInList = checkableItemWrapper.getPositionInList();
                 ViewGroup viewGroup = (ViewGroup) checkable;
                 TextView textView = (TextView) (viewGroup.getChildAt(0));
-                text.append(textView.getText().toString());
+                text.append("第 " + positionInList + " 项 : " + textView.getText().toString());
             }
         }
         tvCheckedUseAdapter.setText(text);
