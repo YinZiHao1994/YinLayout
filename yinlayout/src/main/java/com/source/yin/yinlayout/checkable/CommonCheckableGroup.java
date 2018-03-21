@@ -215,5 +215,11 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
         return adapter;
     }
 
+    public boolean isMultiple() {
+        return isMultiple;
+    }
 
+    public void setMultiple(boolean multiple) {
+        isMultiple = multiple;
+    }
 }
