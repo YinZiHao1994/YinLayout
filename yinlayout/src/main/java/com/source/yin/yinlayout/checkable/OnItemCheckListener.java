@@ -6,6 +6,6 @@ package com.source.yin.yinlayout.checkable;
 
 public interface OnItemCheckListener {
 
-    void onCheckedStateChange();
+    void onCheckedStateChange(CheckableGroup checkableGroup);
 
 }

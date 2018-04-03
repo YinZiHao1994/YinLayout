@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 21
-        versionName "2.5.0"
+        versionCode 22
+        versionName "2.5.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -43,7 +43,7 @@ publish {
     userOrg = 'yinzihaoos'//bintray.com用户名
     groupId = 'com.yinzihao'//jcenter上的路径
     artifactId = 'YinLayout'//项目名称
-    publishVersion = '2.5.0'//版本号
+    publishVersion = '2.5.1'//版本号
     desc = '一个自定义布局库'//描述，不重要
     website = 'https://github.com/YinZiHao1994/YinLayout.git'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }

@@ -87,7 +87,7 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
         }
 
         if (onItemCheckListener != null) {
-            onItemCheckListener.onCheckedStateChange();
+            onItemCheckListener.onCheckedStateChange(this);
         }
     }
 

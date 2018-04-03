@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import com.source.yin.yinlayout.checkable.CheckableGroup;
 import com.source.yin.yinlayout.checkable.CommonCheckableGroup;
 import com.source.yin.yinlayout.checkable.OnItemCheckListener;
 import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
@@ -65,7 +66,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
 
         commonCheckableGroupUseAdapter.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange() {
+            public void onCheckedStateChange(CheckableGroup checkableGroup) {
                 showCheckedUseAdapter();
             }
         });
@@ -81,7 +82,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
         commonCheckableGroupUseAdapterHorizontal.checkItem(1);
         commonCheckableGroupUseAdapterHorizontal.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange() {
+            public void onCheckedStateChange(CheckableGroup checkableGroup) {
                 Checkable checkedItem = commonCheckableGroupUseAdapterHorizontal.getCheckedItem();
                 if (checkedItem instanceof TextView) {
                     String s = ((TextView) checkedItem).getText().toString();
@@ -96,7 +97,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
     private void initCommonCheckableGroup() {
         commonCheckableGroup.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange() {
+            public void onCheckedStateChange(CheckableGroup checkableGroup) {
                 showChecked();
             }
         });

@@ -93,7 +93,7 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
             changeCheckedState(targetCheckable, isCheck);
         }
         if (onItemCheckListener != null) {
-            onItemCheckListener.onCheckedStateChange();
+            onItemCheckListener.onCheckedStateChange(this);
         }
     }
 

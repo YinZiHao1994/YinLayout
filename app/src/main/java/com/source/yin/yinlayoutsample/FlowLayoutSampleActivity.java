@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import com.source.yin.yinlayout.checkable.CheckableGroup;
 import com.source.yin.yinlayout.checkable.CheckableTag;
 import com.source.yin.yinlayout.checkable.OnItemCheckListener;
 import com.source.yin.yinlayout.flowlayout.CheckableGroupFlowLayout;
@@ -62,7 +63,7 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
         });
         checkableGroupFlowLayout.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange() {
+            public void onCheckedStateChange(CheckableGroup checkableGroup) {
                 Checkable checkedItem = checkableGroupFlowLayout.getCheckedItem();
                 if (checkedItem instanceof CheckableTag) {
                     CheckableTag checkableTag = (CheckableTag) checkedItem;
@@ -86,7 +87,7 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
         });
         checkableGroupFlowLayoutMultiple.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange() {
+            public void onCheckedStateChange(CheckableGroup checkableGroup) {
                 List<Checkable> haveCheckedList = checkableGroupFlowLayoutMultiple.getCheckedItemList();
                 tvCheckedNum.setText(String.valueOf(haveCheckedList.size()));
             }
