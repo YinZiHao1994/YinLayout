@@ -62,9 +62,10 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
         });
         checkableGroupFlowLayout.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange(Checkable checkable) {
-                if (checkable instanceof CheckableTag) {
-                    CheckableTag checkableTag = (CheckableTag) checkable;
+            public void onCheckedStateChange() {
+                Checkable checkedItem = checkableGroupFlowLayout.getCheckedItem();
+                if (checkedItem instanceof CheckableTag) {
+                    CheckableTag checkableTag = (CheckableTag) checkedItem;
                     View child = checkableTag.getChildAt(0);
                     if (child instanceof TextView) {
                         TextView textView = (TextView) child;
@@ -85,7 +86,7 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
         });
         checkableGroupFlowLayoutMultiple.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange(Checkable checkable) {
+            public void onCheckedStateChange() {
                 List<Checkable> haveCheckedList = checkableGroupFlowLayoutMultiple.getCheckedItemList();
                 tvCheckedNum.setText(String.valueOf(haveCheckedList.size()));
             }

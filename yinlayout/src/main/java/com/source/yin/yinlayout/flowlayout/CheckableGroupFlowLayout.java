@@ -78,22 +78,23 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
         if (!isMultiple) {
             for (Checkable checkable : checkableList) {
                 if (checkable != targetCheckable) {
-                    if (checkable.isChecked()) {
-                        changeCheckedState(checkable, false);
-                    }
+                    changeCheckedState(checkable, false);
                 }
             }
+            changeCheckedState(targetCheckable, true);
+        } else {
+            changeCheckedState(targetCheckable, isCheck);
         }
-        changeCheckedState(targetCheckable, isCheck);
+
+        if (onItemCheckListener != null) {
+            onItemCheckListener.onCheckedStateChange();
+        }
     }
 
 
     private void changeCheckedState(Checkable checkable, boolean isChecked) {
         if (checkable != null) {
             checkable.setChecked(isChecked);
-            if (onItemCheckListener != null) {
-                onItemCheckListener.onCheckedStateChange(checkable);
-            }
             if (checkable instanceof ViewGroup) {
                 changeChildCheckState((ViewGroup) checkable, isChecked);
             }

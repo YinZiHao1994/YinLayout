@@ -3,6 +3,7 @@ package com.source.yin.yinlayoutsample;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Checkable;
@@ -64,10 +65,8 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
 
         commonCheckableGroupUseAdapter.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange(Checkable checkable) {
-                if (checkable.isChecked()) {
-                    showCheckedUseAdapter();
-                }
+            public void onCheckedStateChange() {
+                showCheckedUseAdapter();
             }
         });
 
@@ -82,13 +81,12 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
         commonCheckableGroupUseAdapterHorizontal.checkItem(1);
         commonCheckableGroupUseAdapterHorizontal.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange(Checkable checkable) {
-                if (checkable.isChecked()) {
-                    Checkable checkedItem = commonCheckableGroupUseAdapterHorizontal.getCheckedItem();
-                    if (checkedItem instanceof TextView) {
-                        String s = ((TextView) checkedItem).getText().toString();
-                        tvUseAdapterHorizontal.setText(s);
-                    }
+            public void onCheckedStateChange() {
+                Checkable checkedItem = commonCheckableGroupUseAdapterHorizontal.getCheckedItem();
+                if (checkedItem instanceof TextView) {
+                    String s = ((TextView) checkedItem).getText().toString();
+                    Log.d("yzh", "s = " + s);
+                    tvUseAdapterHorizontal.setText(s);
                 }
             }
         });
@@ -98,7 +96,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
     private void initCommonCheckableGroup() {
         commonCheckableGroup.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
-            public void onCheckedStateChange(Checkable checkable) {
+            public void onCheckedStateChange() {
                 showChecked();
             }
         });
