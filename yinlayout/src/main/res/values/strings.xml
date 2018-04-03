@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YinLayout</string>
+    <string name="multiple_error">此父布局处于可多选情况，无法确定单一选中对象</string>
+    <string name="too_many_data_error">%1$d 项被选中: %2$s</string>
 </resources>

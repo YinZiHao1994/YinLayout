@@ -74,8 +74,8 @@
             android:id="@+id/common_checkable_group_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:multiple="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:multiple="true">
 
             <com.source.yin.yinlayout.checkable.CheckableTag
                 android:layout_width="wrap_content"
@@ -163,6 +163,22 @@
             android:orientation="horizontal"
             app:multiple="false" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选中项 : " />
+
+            <TextView
+                android:id="@+id/tv_checked_use_adapter_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

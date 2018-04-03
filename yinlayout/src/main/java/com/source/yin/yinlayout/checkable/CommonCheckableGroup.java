@@ -151,6 +151,36 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
         return checkableItemWrapperList;
     }
 
+    @Override
+    public Checkable getCheckedItem() {
+        if (isMultiple) {
+            throw new RuntimeException(getResources().getString(R.string.multiple_error));
+        }
+        List<Checkable> checkedItemList = getCheckedItemList();
+        if (checkedItemList == null || checkedItemList.size() <= 0) {
+            return null;
+        }
+        if (checkedItemList.size() > 1) {
+            throw new RuntimeException(getResources().getString(R.string.too_many_data_error, checkedItemList.size(), checkedItemList));
+        }
+        return checkedItemList.get(0);
+    }
+
+    @Override
+    public Integer getCheckedItemPosition() {
+        if (isMultiple) {
+            throw new RuntimeException(getResources().getString(R.string.multiple_error));
+        }
+        List<Integer> checkedItemPositionList = getCheckedItemPositionList();
+        if (checkedItemPositionList == null || checkedItemPositionList.size() <= 0) {
+            return null;
+        }
+        if (checkedItemPositionList.size() > 1) {
+            throw new RuntimeException(getResources().getString(R.string.too_many_data_error, checkedItemPositionList.size(), checkedItemPositionList));
+        }
+        return checkedItemPositionList.get(0);
+    }
+
 
     @Override
     public List<Checkable> getCheckableList() {

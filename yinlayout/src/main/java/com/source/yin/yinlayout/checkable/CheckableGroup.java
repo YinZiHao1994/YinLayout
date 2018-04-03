@@ -42,4 +42,19 @@ public interface CheckableGroup {
      * 返回被选中项在列表中的位置的集合
      */
     List<Integer> getCheckedItemPositionList();
+
+
+    /**
+     * 返回处于被选中状态的对象（只适用于单选情况）
+     *
+     * @return 处于被选中状态的对象
+     */
+    Checkable getCheckedItem();
+
+    /**
+     * 返回被选中项在列表中的位置（只适用于单选情况）
+     */
+    Integer getCheckedItemPosition();
+
+
 }

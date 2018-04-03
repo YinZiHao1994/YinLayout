@@ -27,6 +27,7 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
     private CommonCheckableGroup commonCheckableGroup;
     private TextView tvChecked;
     private TextView tvCheckedUseAdapter;
+    private TextView tvUseAdapterHorizontal;
 
     private CommonCheckableGroup commonCheckableGroupUseAdapter;
     private CommonCheckableGroup commonCheckableGroupUseAdapterHorizontal;
@@ -37,8 +38,10 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checkable_group_sample);
         commonCheckableGroup = findViewById(R.id.common_checkable_group);
         tvChecked = findViewById(R.id.tv_checked);
+        tvUseAdapterHorizontal = findViewById(R.id.tv_checked_use_adapter_horizontal);
 
         commonCheckableGroupUseAdapter = findViewById(R.id.common_checkable_group_use_adapter);
+        commonCheckableGroupUseAdapter.setMultiple(false);
         commonCheckableGroupUseAdapterHorizontal = findViewById(R.id.common_checkable_group_use_adapter_horizontal);
         tvCheckedUseAdapter = findViewById(R.id.tv_checked_use_adapter);
         stringList = new ArrayList<>();
@@ -62,7 +65,9 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
         commonCheckableGroupUseAdapter.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
             public void onCheckedStateChange(Checkable checkable) {
-                showCheckedUseAdapter();
+                if (checkable.isChecked()) {
+                    showCheckedUseAdapter();
+                }
             }
         });
 
@@ -70,11 +75,24 @@ public class CheckableGroupSampleActivity extends AppCompatActivity {
         commonCheckableGroupUseAdapterHorizontal.setLayoutAdapter(new BaseLayoutAdapter<String>(getApplicationContext(), stringList, R.layout.checkable_group_layout_item_horizontal) {
             @Override
             public void dataBind(View itemView, int position, String data) {
-                TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
+                TextView textView = (TextView) itemView;
                 textView.setText(data);
             }
         });
         commonCheckableGroupUseAdapterHorizontal.checkItem(1);
+        commonCheckableGroupUseAdapterHorizontal.setOnItemCheckListener(new OnItemCheckListener() {
+            @Override
+            public void onCheckedStateChange(Checkable checkable) {
+                if (checkable.isChecked()) {
+                    Checkable checkedItem = commonCheckableGroupUseAdapterHorizontal.getCheckedItem();
+                    if (checkedItem instanceof TextView) {
+                        String s = ((TextView) checkedItem).getText().toString();
+                        tvUseAdapterHorizontal.setText(s);
+                    }
+                }
+            }
+        });
+
     }
 
     private void initCommonCheckableGroup() {
