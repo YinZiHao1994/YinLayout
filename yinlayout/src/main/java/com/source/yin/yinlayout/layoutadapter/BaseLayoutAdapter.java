@@ -27,7 +27,7 @@ public abstract class BaseLayoutAdapter<T> {
         this.layoutRes = layoutRes;
     }
 
-    public void notidifyDataChanged() {
+    public void notifyDataChanged() {
         if (dataChangeListenerList != null) {
             for (DataChangeListener dataChangeListener : dataChangeListenerList) {
                 dataChangeListener.onDataChange();

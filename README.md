@@ -69,7 +69,7 @@ xml 中设置 `multiple` 属性为 `ture` 则表示可多选。
 ```
 通过 `setCheckedListener()` 设置选中事件监听。通过 `getCheckedItemList()` 得到当前选中的对象列表。
 
-![common_check_layout](https://github.com/YinZiHao1994/YinLayout/blob/master/app/src/main/res/drawable/common_check_layout.gif)
+![common_check_layout](https://github.com/YinZiHao1994/YinLayout/blob/master/demoimage/common_check_layout.gif)
 
 ## FlowLayout
 流式布局。子 `view` 将横向依次填满布局的每一行。
@@ -79,13 +79,13 @@ xml 中设置 `multiple` 属性为 `ture` 则表示可多选。
 ## CheckableGroupFlowLayout
 用于选择标签的流式布局。继承了 `FlowLayout`，所以显示样式与 `FlowLayout` 相同。同时与 `CommonCheckableGroup` 一样实现了 [CheckableGroup](#checkablegroup) 接口，所以同样可通过 `setOnItemCheckListener()` 设置选项状态改变监听和通过 `getCheckedItemList()` 获取当前选中项的列表。
 
-![flow_layout](https://github.com/YinZiHao1994/YinLayout/blob/master/app/src/main/res/drawable/flow_layout.gif)
+![flow_layout](https://github.com/YinZiHao1994/YinLayout/blob/master/demoimage/flow_layout.gif)
 
 
 ## FlipView
 轮播控件，类似`{@link android.support.v4.view.ViewPager}`，但实现更简单、并且可控制动画效果、动画时长。适用于简单的文字、图片等的轮播。
 
-![flip_view](https://github.com/YinZiHao1994/YinLayout/blob/master/app/src/main/res/drawable/flip_view.gif)
+![flip_view](https://github.com/YinZiHao1994/YinLayout/blob/master/demoimage/flip_view.gif)
 
 ## SideMenuLayout
 横划菜单 `ViewGroup`,常见于列表
@@ -127,7 +127,7 @@ xml 中设置 `multiple` 属性为 `ture` 则表示可多选。
 `SideMenuLayout` 中的第一个子 `view` 将作为内容，后面的子 `view` 将作为菜单。
 通过 `setOnMenuClickListener()` 方法设置菜单项的点击事件监听。
 
-![side_menu](https://github.com/YinZiHao1994/YinLayout/blob/master/app/src/main/res/drawable/side_menu.gif)
+![side_menu](https://github.com/YinZiHao1994/YinLayout/blob/master/demoimage/side_menu.gif)
 
 ## <span id="CheckableGroup">CheckableGroup</span>
 子 view 可被选中的 viewGroup 的统一接口

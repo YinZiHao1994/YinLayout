@@ -67,7 +67,7 @@ public class FlipView extends ViewFlipper implements LayoutByAdapterAble, BaseLa
     public void setLayoutAdapter(BaseLayoutAdapter adapter) {
         baseLayoutAdapter = adapter;
         baseLayoutAdapter.addDataChangeListener(this);
-        baseLayoutAdapter.notidifyDataChanged();
+        baseLayoutAdapter.notifyDataChanged();
     }
 
     @Override
