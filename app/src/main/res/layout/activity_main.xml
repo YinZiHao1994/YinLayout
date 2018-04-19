@@ -38,4 +38,10 @@
         android:layout_height="wrap_content"
         android:text="flipView" />
 
+    <Button
+        android:id="@+id/btn_pull_to_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pullToRefresh" />
+
 </LinearLayout>

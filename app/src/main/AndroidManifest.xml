@@ -20,7 +20,8 @@
         <activity android:name=".FlowLayoutSampleActivity" />
         <activity android:name=".MoonMenuActivity" />
         <activity android:name=".SideMenuActivity" />
-        <activity android:name=".FlipActivity"></activity>
+        <activity android:name=".FlipActivity"/>
+        <activity android:name=".PullToRefreshLayoutActivity"/>
     </application>
 
 </manifest>

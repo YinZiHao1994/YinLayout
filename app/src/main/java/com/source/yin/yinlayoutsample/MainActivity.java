@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnMoonMenu;
     private Button btnSideMenu;
     private Button btnFlipView;
+    private Button btnPullToRefresh;
 
 
     @Override
@@ -25,12 +26,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMoonMenu = findViewById(R.id.btn_moon_menu);
         btnSideMenu = findViewById(R.id.btn_side_menu);
         btnFlipView = findViewById(R.id.btn_flip_view);
+        btnPullToRefresh = findViewById(R.id.btn_pull_to_refresh);
 
         btnFlowLayout.setOnClickListener(this);
         btnCheckableGroup.setOnClickListener(this);
         btnMoonMenu.setOnClickListener(this);
         btnSideMenu.setOnClickListener(this);
         btnFlipView.setOnClickListener(this);
+        btnPullToRefresh.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_flip_view:
                 intent = new Intent(getApplicationContext(), FlipActivity.class);
+                break;
+            case R.id.btn_pull_to_refresh:
+                intent = new Intent(getApplicationContext(), PullToRefreshLayoutActivity.class);
                 break;
         }
         if (intent != null) {
