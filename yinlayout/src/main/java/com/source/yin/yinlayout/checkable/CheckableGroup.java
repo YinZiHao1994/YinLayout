@@ -56,5 +56,14 @@ public interface CheckableGroup {
      */
     Integer getCheckedItemPosition();
 
+    /**
+     * 设置所有子项是否能被选中
+     */
+    void setChildCheckable(boolean childCheckable);
+
+    /**
+     * 设置是否能多选
+     */
+    void setMultiple(boolean multiple);
 
 }

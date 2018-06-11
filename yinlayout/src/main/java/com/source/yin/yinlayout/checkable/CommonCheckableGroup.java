@@ -33,6 +33,7 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
 
     private BaseLayoutAdapter adapter;
     private Context context;
+    private boolean childCheckable = true;
 
     public CommonCheckableGroup(Context context) {
         this(context, null);
@@ -51,7 +52,11 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
         for (int i = 0; i < n; i++) {
             int attr = a.getIndex(i);
             if (attr == R.styleable.CommonCheckableGroup_multiple) {
-                this.isMultiple = a.getBoolean(attr, false);
+                boolean isMultiple = a.getBoolean(attr, false);
+                setMultiple(isMultiple);
+            } else if (attr == R.styleable.CommonCheckableGroup_child_checkable) {
+                boolean childCheckable = a.getBoolean(attr, true);
+                setChildCheckable(childCheckable);
             }
         }
         a.recycle();
@@ -67,7 +72,9 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
         for (int i = 0; i < childCount; i++) {
             View childView = getChildAt(i);
             if (childView instanceof Checkable) {
-                childView.setOnClickListener(this);
+                if (childCheckable) {
+                    childView.setOnClickListener(this);
+                }
                 checkableList.add((Checkable) childView);
             }
         }
@@ -179,6 +186,11 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
             throw new RuntimeException(getResources().getString(R.string.too_many_data_error, checkedItemPositionList.size(), checkedItemPositionList));
         }
         return checkedItemPositionList.get(0);
+    }
+
+    @Override
+    public void setChildCheckable(boolean childCheckable) {
+        this.childCheckable = childCheckable;
     }
 
 

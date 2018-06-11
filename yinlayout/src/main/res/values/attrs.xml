@@ -3,13 +3,16 @@
 
     <!--是否多选-->
     <attr name="multiple" format="boolean" />
+    <attr name="child_checkable" format="boolean" />
 
     <declare-styleable name="CheckableGroupFlowLayout">
         <attr name="multiple" />
+        <attr name="child_checkable" />
     </declare-styleable>
 
     <declare-styleable name="CommonCheckableGroup">
         <attr name="multiple" />
+        <attr name="child_checkable" />
     </declare-styleable>
 
 
