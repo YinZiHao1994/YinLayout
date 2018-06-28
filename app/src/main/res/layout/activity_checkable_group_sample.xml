@@ -20,6 +20,7 @@
             android:id="@+id/common_checkable_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:child_check_state_cancelable="true"
             android:orientation="vertical">
 
             <CheckedTextView

@@ -57,9 +57,14 @@ public interface CheckableGroup {
     Integer getCheckedItemPosition();
 
     /**
-     * 设置所有子项是否能被选中
+     * 设置所有子项的选中状态是否可编辑（用于某些情况下只用来展示不能编辑的被选中状态）
      */
     void setChildCheckable(boolean childCheckable);
+
+    /**
+     * 设置当单选情况下，再次点击选中项能否取消选中
+     */
+    void setChildCheckStateCancelable(boolean childCheckStateCancelable);
 
     /**
      * 设置是否能多选

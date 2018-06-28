@@ -28,11 +28,14 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
 
     //是否能多选
     private boolean isMultiple;
+    //单选情况下，再次点击选中项能否取消选中
+    private boolean childCheckStateCancelable;
     private List<Checkable> checkableList = new ArrayList<>();
     private OnItemCheckListener onItemCheckListener;
 
     private BaseLayoutAdapter adapter;
     private Context context;
+    //子项是否能更改被选中状态（用于某些情况下只用来展示不能编辑的被选中状态）
     private boolean childCheckable = true;
 
     public CommonCheckableGroup(Context context) {
@@ -57,6 +60,9 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
             } else if (attr == R.styleable.CommonCheckableGroup_child_checkable) {
                 boolean childCheckable = a.getBoolean(attr, true);
                 setChildCheckable(childCheckable);
+            } else if (attr == R.styleable.CommonCheckableGroup_child_check_state_cancelable) {
+                boolean childCheckStateCancelable = a.getBoolean(attr, false);
+                setChildCheckStateCancelable(childCheckStateCancelable);
             }
         }
         a.recycle();
@@ -95,7 +101,11 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
                     changeCheckedState(checkable, false);
                 }
             }
-            changeCheckedState(targetCheckable, true);
+            if (childCheckStateCancelable) {
+                changeCheckedState(targetCheckable, !targetCheckable.isChecked());
+            } else {
+                changeCheckedState(targetCheckable, true);
+            }
         } else {
             changeCheckedState(targetCheckable, isCheck);
         }
@@ -191,6 +201,11 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     @Override
     public void setChildCheckable(boolean childCheckable) {
         this.childCheckable = childCheckable;
+    }
+
+    @Override
+    public void setChildCheckStateCancelable(boolean childCheckStateCancelable) {
+        this.childCheckStateCancelable = childCheckStateCancelable;
     }
 
 

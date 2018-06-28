@@ -28,6 +28,7 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
     //是否能多选
     private boolean isMultiple;
     private boolean childCheckable = true;
+    private boolean childCheckStateCancelable;
 
     public CheckableGroupFlowLayout(Context context) {
         this(context, null);
@@ -50,6 +51,9 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
             } else if (attr == R.styleable.CommonCheckableGroup_child_checkable) {
                 boolean childCheckable = a.getBoolean(attr, true);
                 setChildCheckable(childCheckable);
+            } else if (attr == R.styleable.CommonCheckableGroup_child_check_state_cancelable) {
+                boolean childCheckStateCancelable = a.getBoolean(attr, false);
+                setChildCheckStateCancelable(childCheckStateCancelable);
             }
         }
         a.recycle();
@@ -88,7 +92,11 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
                     changeCheckedState(checkable, false);
                 }
             }
-            changeCheckedState(targetCheckable, true);
+            if (childCheckStateCancelable) {
+                changeCheckedState(targetCheckable, !targetCheckable.isChecked());
+            } else {
+                changeCheckedState(targetCheckable, true);
+            }
         } else {
             changeCheckedState(targetCheckable, isCheck);
         }
@@ -190,6 +198,11 @@ public class CheckableGroupFlowLayout extends FlowLayout implements View.OnClick
     @Override
     public void setChildCheckable(boolean childCheckable) {
         this.childCheckable = childCheckable;
+    }
+
+    @Override
+    public void setChildCheckStateCancelable(boolean childCheckStateCancelable) {
+        this.childCheckStateCancelable = childCheckStateCancelable;
     }
 
     @Override

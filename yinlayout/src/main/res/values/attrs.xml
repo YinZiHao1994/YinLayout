@@ -4,15 +4,18 @@
     <!--是否多选-->
     <attr name="multiple" format="boolean" />
     <attr name="child_checkable" format="boolean" />
+    <attr name="child_check_state_cancelable" format="boolean" />
 
     <declare-styleable name="CheckableGroupFlowLayout">
         <attr name="multiple" />
         <attr name="child_checkable" />
+        <attr name="child_check_state_cancelable" />
     </declare-styleable>
 
     <declare-styleable name="CommonCheckableGroup">
         <attr name="multiple" />
         <attr name="child_checkable" />
+        <attr name="child_check_state_cancelable" />
     </declare-styleable>
 
 
