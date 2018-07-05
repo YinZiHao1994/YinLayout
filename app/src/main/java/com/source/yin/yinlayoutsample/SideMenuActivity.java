@@ -24,7 +24,7 @@ public class SideMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_side_menu);
 
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         initAdapter();
     }
 
@@ -97,7 +97,7 @@ public class SideMenuActivity extends AppCompatActivity {
             public MyViewHolder(View itemView) {
                 super(itemView);
                 sideMenuLayout = (SideMenuLayout) itemView;
-                tvContent = itemView.findViewById(R.id.tv_content);
+                tvContent = (TextView) itemView.findViewById(R.id.tv_content);
             }
 
             public TextView getTvContent() {

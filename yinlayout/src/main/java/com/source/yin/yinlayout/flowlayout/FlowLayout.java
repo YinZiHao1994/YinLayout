@@ -152,7 +152,7 @@ public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChang
         int itemCount = flowLayoutAdapter.getItemCount();
         for (int i = 0; i < itemCount; i++) {
 //            View itemView = flowLayoutAdapter.getItemView(this, i);
-            int layoutRes = flowLayoutAdapter.getLayoutRes();
+            int layoutRes = flowLayoutAdapter.getLayoutRes(i);
             if (layoutRes != 0) {
                 View view = LayoutInflater.from(context).inflate(layoutRes, this, false);
                 addView(view);

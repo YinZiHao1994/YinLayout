@@ -25,8 +25,8 @@ public class PullToRefreshLayoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pull_to_refresh);
 
 
-        pullToRefreshLayout = findViewById(R.id.pull_to_refresh_layout);
-        recyclerView = findViewById(R.id.recycler_view);
+        pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.pull_to_refresh_layout);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         pullToRefreshLayout.setRefreshListener(new PullToRefreshLayout.RefreshListener() {
             @Override
             public void onRefresh() {
@@ -47,7 +47,7 @@ public class PullToRefreshLayoutActivity extends AppCompatActivity {
         BaseAdapter<String> adapter = new BaseAdapter<String>(getApplicationContext(), dataList, R.layout.text_list_item) {
             @Override
             public void onBindView(BaseViewHolder holder, String data, int position) {
-                TextView textView = holder.getView().findViewById(R.id.tv);
+                TextView textView = (TextView) holder.getView().findViewById(R.id.tv);
                 textView.setText(data);
             }
         };

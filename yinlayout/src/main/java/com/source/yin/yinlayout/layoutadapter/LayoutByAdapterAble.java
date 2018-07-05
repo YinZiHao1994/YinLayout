@@ -5,7 +5,7 @@ package com.source.yin.yinlayout.layoutadapter;
  * Created by yin on 2018/1/8.
  */
 
-public interface LayoutByAdapterAble<T extends BaseLayoutAdapter> {
+public interface LayoutByAdapterAble<T extends CommonLayoutAdapter> {
 
     void setLayoutAdapter(T adapter);
 

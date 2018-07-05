@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.source.yin.yinlayout.R;
 import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
+import com.source.yin.yinlayout.layoutadapter.CommonLayoutAdapter;
 import com.source.yin.yinlayout.layoutadapter.LayoutByAdapterAble;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     private List<Checkable> checkableList = new ArrayList<>();
     private OnItemCheckListener onItemCheckListener;
 
-    private BaseLayoutAdapter adapter;
+    private CommonLayoutAdapter adapter;
     private Context context;
     //子项是否能更改被选中状态（用于某些情况下只用来展示不能编辑的被选中状态）
     private boolean childCheckable = true;
@@ -249,8 +250,7 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
         removeAllViews();
         int itemCount = adapter.getItemCount();
         for (int i = 0; i < itemCount; i++) {
-//            View itemView = flowLayoutAdapter.getItemView(this, i);
-            int layoutRes = adapter.getLayoutRes();
+            int layoutRes = adapter.getLayoutRes(i);
             if (layoutRes != 0) {
                 View view = LayoutInflater.from(context).inflate(layoutRes, this, false);
                 addView(view);
@@ -260,15 +260,14 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     }
 
     @Override
-    public void setLayoutAdapter(BaseLayoutAdapter adapter) {
+    public void setLayoutAdapter(CommonLayoutAdapter adapter) {
         this.adapter = adapter;
         adapter.addDataChangeListener(this);
         onDataChange();
-
     }
 
     @Override
-    public BaseLayoutAdapter getLayoutAdapter() {
+    public CommonLayoutAdapter getLayoutAdapter() {
         return adapter;
     }
 

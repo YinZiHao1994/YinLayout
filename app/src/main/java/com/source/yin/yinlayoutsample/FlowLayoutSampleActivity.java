@@ -56,8 +56,8 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
     private void initCheckableFlowLayout() {
         checkableGroupFlowLayout.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item) {
             @Override
-            public void dataBind(View itemView, int position, String data) {
-                TextView textView = itemView.findViewById(R.id.tv_item);
+            public void onDataBind(View itemView, String data, int position) {
+                TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
                 textView.setText(data);
             }
         });
@@ -80,8 +80,8 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
 
         checkableGroupFlowLayoutMultiple.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item2) {
             @Override
-            public void dataBind(View itemView, int position, String data) {
-                TextView textView = itemView.findViewById(R.id.tv_item);
+            public void onDataBind(View itemView, String data, int position) {
+                TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
                 textView.setText(data);
             }
         });
@@ -99,8 +99,8 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
     private void initFlowLayout() {
         flowLayout.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.default_flow_layout_item) {
             @Override
-            public void dataBind(View itemView, int position, String data) {
-                TextView textView = itemView.findViewById(R.id.tv_item);
+            public void onDataBind(View itemView, String data, int position) {
+                TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
                 textView.setText(data);
             }
         });

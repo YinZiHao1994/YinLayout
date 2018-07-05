@@ -17,7 +17,7 @@ public class MoonMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moon_menu);
 
-        moonMenu = findViewById(R.id.moon_menu);
+        moonMenu = (MoonMenu) findViewById(R.id.moon_menu);
 
         moonMenu.setOnMenuItemClickListener(new MoonMenu.OnMenuItemClickListener() {
             @Override

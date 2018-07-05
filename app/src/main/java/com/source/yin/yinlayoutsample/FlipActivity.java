@@ -29,10 +29,10 @@ public class FlipActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flip);
 
-        flipViewText = findViewById(R.id.flip_view_text);
-        flipViewImage = findViewById(R.id.flip_view_image);
-        seekBar = findViewById(R.id.seek_bar);
-        radioGroup = findViewById(R.id.radio_group);
+        flipViewText = (FlipView) findViewById(R.id.flip_view_text);
+        flipViewImage = (FlipView) findViewById(R.id.flip_view_image);
+        seekBar = (SeekBar) findViewById(R.id.seek_bar);
+        radioGroup = (RadioGroup) findViewById(R.id.radio_group);
 
         initFlipText();
         initFlipImage();
@@ -95,7 +95,7 @@ public class FlipActivity extends AppCompatActivity {
         drawableResList.add(R.mipmap.ic_launcher_round);
         flipViewImage.setLayoutAdapter(new BaseLayoutAdapter<Integer>(getApplicationContext(), drawableResList, R.layout.item_image_flip) {
             @Override
-            public void dataBind(View itemView, int position, Integer data) {
+            public void onDataBind(View itemView, Integer data, int position) {
                 if (itemView instanceof ImageView) {
                     ((ImageView) itemView).setImageResource(data);
                 }
@@ -116,7 +116,7 @@ public class FlipActivity extends AppCompatActivity {
         }
         flipViewText.setLayoutAdapter(new BaseLayoutAdapter<String>(getApplicationContext(), dataList, R.layout.item_text_flip) {
             @Override
-            public void dataBind(View itemView, int position, String data) {
+            public void onDataBind(View itemView, String data, int position) {
                 if (itemView instanceof TextView) {
                     ((TextView) itemView).setText(data);
                 }

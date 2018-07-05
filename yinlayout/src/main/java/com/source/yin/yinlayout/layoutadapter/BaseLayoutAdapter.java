@@ -9,66 +9,47 @@ import java.util.List;
 
 /**
  * 为实现了{@link LayoutByAdapterAble}接口的 viewGroup 提供 adapter 方式的 layout
+ * 当只需要一种样式的子项时方便使用，如果子项需要不同的 UI 显示方式，请使用{@link CommonLayoutAdapter}
  * Created by yin on 2017/12/12.
  */
 
-public abstract class BaseLayoutAdapter<T> {
-
-    private Context context;
-    private List<T> dataList;
-    private List<DataChangeListener> dataChangeListenerList;
+public abstract class BaseLayoutAdapter<T> extends CommonLayoutAdapter<T> {
 
     @LayoutRes
     private int layoutRes;
 
     public BaseLayoutAdapter(Context context, List<T> dataList, int layoutRes) {
-        this.context = context;
-        this.dataList = dataList;
+        super(context, dataList);
         this.layoutRes = layoutRes;
     }
 
-    public void notifyDataChanged() {
-        if (dataChangeListenerList != null) {
-            for (DataChangeListener dataChangeListener : dataChangeListenerList) {
-                dataChangeListener.onDataChange();
+    @Override
+    public List<DataType<T>> getDataTypes() {
+        List<DataType<T>> dataTypeList = new ArrayList<>();
+        DataType<T> dataType = new DataType<T>() {
+            @Override
+            public int getLayoutId() {
+                return layoutRes;
             }
-        }
+
+            @Override
+            public boolean isMatching(T data, int position) {
+                return true;
+            }
+
+            @Override
+            public void dataBind(View itemView, T data, int position) {
+                onDataBind(itemView, data, position);
+            }
+        };
+        dataTypeList.add(dataType);
+        return dataTypeList;
     }
 
-    public int getItemCount() {
-        if (dataList != null) {
-            return dataList.size();
-        }
-        return 0;
-    }
-
-    public List<T> getDataList() {
-        return dataList;
-    }
-
-    public T getData(int position) {
-        return dataList.get(position);
-    }
+    //子类只需要实现此方法进行数据的绑定显示
+    public abstract void onDataBind(View itemView, T data, int position);
 
     public int getLayoutRes() {
         return layoutRes;
-    }
-
-    public void onDataBind(View view, int position) {
-        T data = dataList.get(position);
-        dataBind(view, position, data);
-    }
-
-    public abstract void dataBind(View itemView, int position, T data);
-
-    public interface DataChangeListener {
-        void onDataChange();
-    }
-
-    public void addDataChangeListener(DataChangeListener dataChangeListener) {
-        if (dataChangeListenerList == null) {
-            dataChangeListenerList = new ArrayList<>();
-        }
-        dataChangeListenerList.add(dataChangeListener);
     }
 }

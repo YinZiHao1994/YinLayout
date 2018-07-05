@@ -8,6 +8,7 @@ import android.widget.ViewFlipper;
 
 import com.source.yin.yinlayout.R;
 import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
+import com.source.yin.yinlayout.layoutadapter.CommonLayoutAdapter;
 import com.source.yin.yinlayout.layoutadapter.LayoutByAdapterAble;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 public class FlipView extends ViewFlipper implements LayoutByAdapterAble, BaseLayoutAdapter.DataChangeListener {
 
 
-    private BaseLayoutAdapter baseLayoutAdapter;
+    private CommonLayoutAdapter baseLayoutAdapter;
     //动画时长
     private int interval = 3000;
     //动画切换方向
@@ -64,27 +65,27 @@ public class FlipView extends ViewFlipper implements LayoutByAdapterAble, BaseLa
 
 
     @Override
-    public void setLayoutAdapter(BaseLayoutAdapter adapter) {
+    public void setLayoutAdapter(CommonLayoutAdapter adapter) {
         baseLayoutAdapter = adapter;
         baseLayoutAdapter.addDataChangeListener(this);
         baseLayoutAdapter.notifyDataChanged();
     }
 
     @Override
-    public BaseLayoutAdapter getLayoutAdapter() {
+    public CommonLayoutAdapter getLayoutAdapter() {
         return baseLayoutAdapter;
     }
 
     @Override
     public void onDataChange() {
         List dataList = baseLayoutAdapter.getDataList();
-        int layoutRes = baseLayoutAdapter.getLayoutRes();
         removeAllViews();
         if (dataList != null && dataList.size() > 0) {
             for (int i = 0; i < dataList.size(); i++) {
+                int layoutRes = baseLayoutAdapter.getLayoutRes(i);
                 View view = LayoutInflater.from(context).inflate(layoutRes, this, false);
                 addView(view);
-                baseLayoutAdapter.dataBind(view, i, dataList.get(i));
+                baseLayoutAdapter.onDataBind(view, i);
             }
         }
         //开始播放动画

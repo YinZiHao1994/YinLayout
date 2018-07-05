@@ -20,8 +20,9 @@
         <activity android:name=".FlowLayoutSampleActivity" />
         <activity android:name=".MoonMenuActivity" />
         <activity android:name=".SideMenuActivity" />
-        <activity android:name=".FlipActivity"/>
-        <activity android:name=".PullToRefreshLayoutActivity"/>
+        <activity android:name=".FlipActivity" />
+        <activity android:name=".PullToRefreshLayoutActivity" />
+        <activity android:name=".DifferentTypeCheckableItemActivity"></activity>
     </application>
 
 </manifest>

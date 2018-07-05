@@ -15,18 +15,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnSideMenu;
     private Button btnFlipView;
     private Button btnPullToRefresh;
+    private Button btnDifferentTypeCheckableItem;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnFlowLayout = findViewById(R.id.btn_flow_layout);
-        btnCheckableGroup = findViewById(R.id.btn_checkable_group);
-        btnMoonMenu = findViewById(R.id.btn_moon_menu);
-        btnSideMenu = findViewById(R.id.btn_side_menu);
-        btnFlipView = findViewById(R.id.btn_flip_view);
-        btnPullToRefresh = findViewById(R.id.btn_pull_to_refresh);
+        btnFlowLayout = (Button) findViewById(R.id.btn_flow_layout);
+        btnCheckableGroup = (Button)findViewById(R.id.btn_checkable_group);
+        btnMoonMenu = (Button)findViewById(R.id.btn_moon_menu);
+        btnSideMenu = (Button)findViewById(R.id.btn_side_menu);
+        btnFlipView = (Button)findViewById(R.id.btn_flip_view);
+        btnPullToRefresh = (Button)findViewById(R.id.btn_pull_to_refresh);
+        btnDifferentTypeCheckableItem = (Button)findViewById(R.id.btn_different_type_checkable_item);
 
         btnFlowLayout.setOnClickListener(this);
         btnCheckableGroup.setOnClickListener(this);
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSideMenu.setOnClickListener(this);
         btnFlipView.setOnClickListener(this);
         btnPullToRefresh.setOnClickListener(this);
+        btnDifferentTypeCheckableItem.setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_checkable_group:
                 intent = new Intent(getApplicationContext(), CheckableGroupSampleActivity.class);
+                break;
+            case R.id.btn_different_type_checkable_item:
+                intent = new Intent(getApplicationContext(), DifferentTypeCheckableItemActivity.class);
                 break;
             case R.id.btn_moon_menu:
                 intent = new Intent(getApplicationContext(), MoonMenuActivity.class);
