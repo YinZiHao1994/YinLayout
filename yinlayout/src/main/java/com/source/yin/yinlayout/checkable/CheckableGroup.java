@@ -33,6 +33,15 @@ public interface CheckableGroup {
      */
     void checkItem(int position);
 
+
+    /**
+     * 设置指定项为选中状态，可选是否触发选中状态改变回调
+     *
+     * @param triggerChangeEvent 是否触发选中状态改变回调
+     * @see #checkItem(int)
+     */
+    void checkItem(int position, boolean triggerChangeEvent);
+
     /**
      * 设置选项被选中状态改变监听器
      */

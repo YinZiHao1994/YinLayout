@@ -91,11 +91,11 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     public void onClick(View v) {
         if (v instanceof Checkable) {
             Checkable checkableView = (Checkable) v;
-            dealWithCheckEvent(checkableView, !checkableView.isChecked());
+            dealWithCheckEvent(checkableView, !checkableView.isChecked(), true);
         }
     }
 
-    private void dealWithCheckEvent(Checkable targetCheckable, boolean isCheck) {
+    private void dealWithCheckEvent(Checkable targetCheckable, boolean isCheck, boolean triggerChangeEvent) {
         if (!isMultiple) {
             for (Checkable checkable : checkableList) {
                 if (checkable != targetCheckable) {
@@ -110,7 +110,7 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
         } else {
             changeCheckedState(targetCheckable, isCheck);
         }
-        if (onItemCheckListener != null) {
+        if (triggerChangeEvent && onItemCheckListener != null) {
             onItemCheckListener.onCheckedStateChange(this);
         }
     }
@@ -217,6 +217,11 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
 
     @Override
     public void checkItem(int position) {
+        checkItem(position, true);
+    }
+
+    @Override
+    public void checkItem(int position, boolean triggerChangeEvent) {
         // todo 在 activity 的 onCreate 和 onResume 中调用此方法时，如果通过如下实现， checkableList 总是为空列表。待解决
         /*if (checkableList != null) {
             if (checkableList.size() > position) {
@@ -233,7 +238,7 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
         }
         View childView = getChildAt(position);
         if (childView instanceof Checkable) {
-            dealWithCheckEvent((Checkable) childView, true);
+            dealWithCheckEvent((Checkable) childView, true, triggerChangeEvent);
         } else {
             Log.e(getClass().getName(), "position " + position + " 位置的 view 不是 Checkable 的");
         }
