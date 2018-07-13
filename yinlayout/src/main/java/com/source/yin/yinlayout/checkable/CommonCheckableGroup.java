@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
 
@@ -25,19 +23,12 @@ import java.util.List;
  * Created by yin on 2017/12/12.
  */
 
-public class CommonCheckableGroup extends LinearLayout implements View.OnClickListener, BaseLayoutAdapter.DataChangeListener, LayoutByAdapterAble, CheckableGroup {
-
-    //是否能多选
-    private boolean isMultiple;
-    //单选情况下，再次点击选中项能否取消选中
-    private boolean childCheckStateCancelable;
-    private List<Checkable> checkableList = new ArrayList<>();
-    private OnItemCheckListener onItemCheckListener;
+public class CommonCheckableGroup extends LinearLayout implements BaseLayoutAdapter.DataChangeListener, LayoutByAdapterAble, CheckableGroup {
 
     private CommonLayoutAdapter adapter;
     private Context context;
-    //子项是否能更改被选中状态（用于某些情况下只用来展示不能编辑的被选中状态）
-    private boolean childCheckable = true;
+
+    private CheckableGroupManager checkableGroupManager;
 
     public CommonCheckableGroup(Context context) {
         this(context, null);
@@ -50,6 +41,9 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     public CommonCheckableGroup(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
+
+        checkableGroupManager = new CheckableGroupManager(context, this);
+
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CommonCheckableGroup,
                 defStyleAttr, 0);
         int n = a.getIndexCount();
@@ -71,148 +65,42 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
 
 
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-
-        checkableList.clear();
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        List<View> childViewList = new ArrayList<>();
         int childCount = getChildCount();
+        childViewList.clear();
         for (int i = 0; i < childCount; i++) {
-            View childView = getChildAt(i);
-            if (childView instanceof Checkable) {
-                if (childCheckable) {
-                    childView.setOnClickListener(this);
-                }
-                checkableList.add((Checkable) childView);
-            }
+            View childAt = getChildAt(i);
+            childViewList.add(childAt);
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v instanceof Checkable) {
-            Checkable checkableView = (Checkable) v;
-            dealWithCheckEvent(checkableView, !checkableView.isChecked(), true);
-        }
-    }
-
-    private void dealWithCheckEvent(Checkable targetCheckable, boolean isCheck, boolean triggerChangeEvent) {
-        if (!isMultiple) {
-            for (Checkable checkable : checkableList) {
-                if (checkable != targetCheckable) {
-                    changeCheckedState(checkable, false);
-                }
-            }
-            if (childCheckStateCancelable) {
-                changeCheckedState(targetCheckable, !targetCheckable.isChecked());
-            } else {
-                changeCheckedState(targetCheckable, true);
-            }
-        } else {
-            changeCheckedState(targetCheckable, isCheck);
-        }
-        if (triggerChangeEvent && onItemCheckListener != null) {
-            onItemCheckListener.onCheckedStateChange(this);
-        }
-    }
-
-    private void changeCheckedState(Checkable checkable, boolean isChecked) {
-        if (checkable != null) {
-            checkable.setChecked(isChecked);
-            if (checkable instanceof ViewGroup) {
-                changeChildCheckState((ViewGroup) checkable, isChecked);
-            }
-        }
-    }
-
-
-    //修改所有 checkable 的子 view 的 checked 属性
-    private void changeChildCheckState(ViewGroup viewGroup, boolean checked) {
-        int childCount = viewGroup.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            View childView = viewGroup.getChildAt(i);
-            if (childView instanceof Checkable) {
-                ((Checkable) childView).setChecked(checked);
-            }
-            if (childView instanceof ViewGroup) {
-                changeChildCheckState((ViewGroup) childView, checked);
-            }
-        }
+        checkableGroupManager.init(childViewList);
     }
 
     @Override
     public List<Checkable> getCheckedItemList() {
-        List<Checkable> checkedItemList = null;
-        if (checkableList != null && checkableList.size() > 0) {
-            checkedItemList = new ArrayList<>();
-            for (Checkable checkable : checkableList) {
-                if (checkable.isChecked()) {
-                    checkedItemList.add(checkable);
-                }
-            }
-        }
-        return checkedItemList;
+        return checkableGroupManager.getCheckedItemList();
     }
 
 
     @Override
     public List<Integer> getCheckedItemPositionList() {
-        List<Integer> checkableItemWrapperList = null;
-        if (checkableList != null && checkableList.size() > 0) {
-            checkableItemWrapperList = new ArrayList<>();
-            for (int i = 0; i < checkableList.size(); i++) {
-                Checkable checkable = checkableList.get(i);
-                if (checkable.isChecked()) {
-                    checkableItemWrapperList.add(i);
-                }
-            }
-        }
-        return checkableItemWrapperList;
+        return checkableGroupManager.getCheckedItemPositionList();
     }
 
     @Override
     public Checkable getCheckedItem() {
-        if (isMultiple) {
-            throw new RuntimeException(getResources().getString(R.string.multiple_error));
-        }
-        List<Checkable> checkedItemList = getCheckedItemList();
-        if (checkedItemList == null || checkedItemList.size() <= 0) {
-            return null;
-        }
-        if (checkedItemList.size() > 1) {
-            throw new RuntimeException(getResources().getString(R.string.too_many_data_error, checkedItemList.size(), checkedItemList));
-        }
-        return checkedItemList.get(0);
+        return checkableGroupManager.getCheckedItem();
     }
 
     @Override
     public Integer getCheckedItemPosition() {
-        if (isMultiple) {
-            throw new RuntimeException(getResources().getString(R.string.multiple_error));
-        }
-        List<Integer> checkedItemPositionList = getCheckedItemPositionList();
-        if (checkedItemPositionList == null || checkedItemPositionList.size() <= 0) {
-            return null;
-        }
-        if (checkedItemPositionList.size() > 1) {
-            throw new RuntimeException(getResources().getString(R.string.too_many_data_error, checkedItemPositionList.size(), checkedItemPositionList));
-        }
-        return checkedItemPositionList.get(0);
+        return checkableGroupManager.getCheckedItemPosition();
     }
-
-    @Override
-    public void setChildCheckable(boolean childCheckable) {
-        this.childCheckable = childCheckable;
-    }
-
-    @Override
-    public void setChildCheckStateCancelable(boolean childCheckStateCancelable) {
-        this.childCheckStateCancelable = childCheckStateCancelable;
-    }
-
 
     @Override
     public List<Checkable> getCheckableList() {
-        return checkableList;
+        return checkableGroupManager.getCheckableList();
     }
 
     @Override
@@ -222,32 +110,17 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
 
     @Override
     public void checkItem(int position, boolean triggerChangeEvent) {
-        // todo 在 activity 的 onCreate 和 onResume 中调用此方法时，如果通过如下实现， checkableList 总是为空列表。待解决
-        /*if (checkableList != null) {
-            if (checkableList.size() > position) {
-                Checkable checkable = checkableList.get(position);
-                dealWithCheckEvent(checkable, true);
-            } else {
-                throw new RuntimeException("传入的位置 : " + position + " 超出可选中的总数量 :" + checkableList.size());
-            }
-        }*/
-
         int childCount = getChildCount();
         if (position >= childCount) {
             throw new RuntimeException("传入的位置 : " + position + " 超出子 view 的总数量 :" + childCount);
         }
-        View childView = getChildAt(position);
-        if (childView instanceof Checkable) {
-            dealWithCheckEvent((Checkable) childView, true, triggerChangeEvent);
-        } else {
-            Log.e(getClass().getName(), "position " + position + " 位置的 view 不是 Checkable 的");
-        }
-
+        View childAt = getChildAt(position);
+        checkableGroupManager.checkItem(position, childAt, triggerChangeEvent);
     }
 
     @Override
     public void setOnItemCheckListener(OnItemCheckListener onItemCheckListener) {
-        this.onItemCheckListener = onItemCheckListener;
+        checkableGroupManager.setOnItemCheckListener(onItemCheckListener);
     }
 
     @Override
@@ -277,10 +150,20 @@ public class CommonCheckableGroup extends LinearLayout implements View.OnClickLi
     }
 
     public boolean isMultiple() {
-        return isMultiple;
+        return checkableGroupManager.isMultiple();
     }
 
     public void setMultiple(boolean multiple) {
-        isMultiple = multiple;
+        checkableGroupManager.setMultiple(multiple);
+    }
+
+    @Override
+    public void setChildCheckable(boolean childCheckable) {
+        checkableGroupManager.setChildCheckable(childCheckable);
+    }
+
+    @Override
+    public void setChildCheckStateCancelable(boolean childCheckStateCancelable) {
+        checkableGroupManager.setChildCheckStateCancelable(childCheckStateCancelable);
     }
 }

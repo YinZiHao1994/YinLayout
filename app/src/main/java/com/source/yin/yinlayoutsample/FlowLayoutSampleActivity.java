@@ -89,7 +89,9 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
             @Override
             public void onCheckedStateChange(CheckableGroup checkableGroup) {
                 List<Checkable> haveCheckedList = checkableGroupFlowLayoutMultiple.getCheckedItemList();
-                tvCheckedNum.setText(String.valueOf(haveCheckedList.size()));
+                if (haveCheckedList != null) {
+                    tvCheckedNum.setText(String.valueOf(haveCheckedList.size()));
+                }
             }
         });
 
