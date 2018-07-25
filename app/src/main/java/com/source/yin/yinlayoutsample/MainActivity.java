@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnFlipView;
     private Button btnPullToRefresh;
     private Button btnDifferentTypeCheckableItem;
+    private Button btnItemClickInterceptor;
 
 
     @Override
@@ -23,12 +24,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnFlowLayout = (Button) findViewById(R.id.btn_flow_layout);
-        btnCheckableGroup = (Button)findViewById(R.id.btn_checkable_group);
-        btnMoonMenu = (Button)findViewById(R.id.btn_moon_menu);
-        btnSideMenu = (Button)findViewById(R.id.btn_side_menu);
-        btnFlipView = (Button)findViewById(R.id.btn_flip_view);
-        btnPullToRefresh = (Button)findViewById(R.id.btn_pull_to_refresh);
-        btnDifferentTypeCheckableItem = (Button)findViewById(R.id.btn_different_type_checkable_item);
+        btnCheckableGroup = (Button) findViewById(R.id.btn_checkable_group);
+        btnMoonMenu = (Button) findViewById(R.id.btn_moon_menu);
+        btnSideMenu = (Button) findViewById(R.id.btn_side_menu);
+        btnFlipView = (Button) findViewById(R.id.btn_flip_view);
+        btnPullToRefresh = (Button) findViewById(R.id.btn_pull_to_refresh);
+        btnDifferentTypeCheckableItem = (Button) findViewById(R.id.btn_different_type_checkable_item);
+        btnItemClickInterceptor = (Button) findViewById(R.id.btn_item_click_interceptor);
 
         btnFlowLayout.setOnClickListener(this);
         btnCheckableGroup.setOnClickListener(this);
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnFlipView.setOnClickListener(this);
         btnPullToRefresh.setOnClickListener(this);
         btnDifferentTypeCheckableItem.setOnClickListener(this);
+        btnItemClickInterceptor.setOnClickListener(this);
     }
 
     @Override
@@ -63,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_pull_to_refresh:
                 intent = new Intent(getApplicationContext(), PullToRefreshLayoutActivity.class);
+                break;
+            case R.id.btn_item_click_interceptor:
+                intent = new Intent(getApplicationContext(), UseItemClickInterceptorActivity.class);
                 break;
         }
         if (intent != null) {

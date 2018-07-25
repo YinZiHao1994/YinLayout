@@ -22,7 +22,8 @@
         <activity android:name=".SideMenuActivity" />
         <activity android:name=".FlipActivity" />
         <activity android:name=".PullToRefreshLayoutActivity" />
-        <activity android:name=".DifferentTypeCheckableItemActivity"></activity>
+        <activity android:name=".DifferentTypeCheckableItemActivity" />
+        <activity android:name=".UseItemClickInterceptorActivity"></activity>
     </application>
 
 </manifest>

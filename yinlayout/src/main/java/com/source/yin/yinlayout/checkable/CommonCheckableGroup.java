@@ -158,6 +158,11 @@ public class CommonCheckableGroup extends LinearLayout implements BaseLayoutAdap
     }
 
     @Override
+    public void setItemClickInterceptor(CheckableGroupManager.ItemClickInterceptor itemClickInterceptor) {
+        checkableGroupManager.setItemClickInterceptor(itemClickInterceptor);
+    }
+
+    @Override
     public void setChildCheckable(boolean childCheckable) {
         checkableGroupManager.setChildCheckable(childCheckable);
     }

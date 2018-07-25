@@ -79,6 +79,11 @@ public class CheckableGroupFlowLayout extends FlowLayout implements CheckableGro
         checkableGroupManager.setMultiple(multiple);
     }
 
+    @Override
+    public void setItemClickInterceptor(CheckableGroupManager.ItemClickInterceptor itemClickInterceptor) {
+        checkableGroupManager.setItemClickInterceptor(itemClickInterceptor);
+    }
+
 
     @Override
     public List<Checkable> getCheckedItemList() {

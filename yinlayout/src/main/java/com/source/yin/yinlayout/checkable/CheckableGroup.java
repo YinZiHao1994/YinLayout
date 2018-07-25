@@ -80,4 +80,10 @@ public interface CheckableGroup {
      */
     void setMultiple(boolean multiple);
 
+    /**
+     * 添加点击事件拦截器
+     * @param itemClickInterceptor
+     */
+    void setItemClickInterceptor(CheckableGroupManager.ItemClickInterceptor itemClickInterceptor);
+
 }

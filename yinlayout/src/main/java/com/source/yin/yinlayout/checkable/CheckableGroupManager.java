@@ -27,6 +27,7 @@ public class CheckableGroupManager implements View.OnClickListener {
     //子项是否能更改被选中状态（用于某些情况下只用来展示不能编辑的被选中状态）
     private boolean childCheckable = true;
     private CheckableGroup checkableGroup;
+    private ItemClickInterceptor itemClickInterceptor;
 
     public CheckableGroupManager(Context context, CheckableGroup checkableGroup) {
         this.context = context;
@@ -92,6 +93,9 @@ public class CheckableGroupManager implements View.OnClickListener {
     public void onClick(View v) {
         if (v instanceof Checkable) {
             Checkable checkableView = (Checkable) v;
+            if (itemClickInterceptor != null && itemClickInterceptor.onInterceptorItemClick(checkableView)) {
+                return;
+            }
             dealWithCheckEvent(checkableView, !checkableView.isChecked(), true);
         }
     }
@@ -219,4 +223,22 @@ public class CheckableGroupManager implements View.OnClickListener {
     }
 
 
+    /**
+     * 点击事件拦截器，可实现自己的点击事件并决定是否拦截后续的框架中的选中事件触发
+     */
+    public interface ItemClickInterceptor {
+        /**
+         * @param checkable
+         * @return isInterceptorItemClickEvent 是否拦截后续事件
+         */
+        boolean onInterceptorItemClick(Checkable checkable);
+    }
+
+    public ItemClickInterceptor getItemClickInterceptor() {
+        return itemClickInterceptor;
+    }
+
+    public void setItemClickInterceptor(ItemClickInterceptor itemClickInterceptor) {
+        this.itemClickInterceptor = itemClickInterceptor;
+    }
 }
