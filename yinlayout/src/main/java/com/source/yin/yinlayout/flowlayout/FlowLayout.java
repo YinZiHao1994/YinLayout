@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.source.yin.yinlayout.layoutadapter.CommonLayoutAdapter;
 import com.source.yin.yinlayout.layoutadapter.LayoutByAdapterAble;
 
 import java.util.ArrayList;
@@ -15,10 +16,10 @@ import java.util.List;
  * 流式布局
  * Created by Yin on 2017/10/25.
  */
-public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChangeListener, LayoutByAdapterAble<FlowLayoutAdapter> {
+public class FlowLayout extends ViewGroup implements CommonLayoutAdapter.DataChangeListener, LayoutByAdapterAble<CommonLayoutAdapter> {
     private List<Integer> childViewNumOfEachRow = new ArrayList<>();
     private List<Integer> heightOfEachRow = new ArrayList<>();
-    private FlowLayoutAdapter flowLayoutAdapter;
+    private CommonLayoutAdapter flowLayoutAdapter;
     private Context context;
 
     public FlowLayout(Context context) {
@@ -163,14 +164,14 @@ public class FlowLayout extends ViewGroup implements FlowLayoutAdapter.DataChang
 
 
     @Override
-    public void setLayoutAdapter(FlowLayoutAdapter adapter) {
+    public void setLayoutAdapter(CommonLayoutAdapter adapter) {
         this.flowLayoutAdapter = adapter;
         flowLayoutAdapter.addDataChangeListener(this);
         onDataChange();
     }
 
     @Override
-    public FlowLayoutAdapter getLayoutAdapter() {
+    public CommonLayoutAdapter getLayoutAdapter() {
         return flowLayoutAdapter;
     }
 }

@@ -12,7 +12,7 @@ import com.source.yin.yinlayout.checkable.CheckableTag;
 import com.source.yin.yinlayout.checkable.OnItemCheckListener;
 import com.source.yin.yinlayout.flowlayout.CheckableGroupFlowLayout;
 import com.source.yin.yinlayout.flowlayout.FlowLayout;
-import com.source.yin.yinlayout.flowlayout.FlowLayoutAdapter;
+import com.source.yin.yinlayout.layoutadapter.BaseLayoutAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
 
 
     private void initCheckableFlowLayout() {
-        checkableGroupFlowLayout.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item) {
+        checkableGroupFlowLayout.setLayoutAdapter(new BaseLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item) {
             @Override
             public void onDataBind(View itemView, String data, int position) {
                 TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
@@ -78,7 +78,7 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
 
         checkableGroupFlowLayout.checkItem(4);
 
-        checkableGroupFlowLayoutMultiple.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item2) {
+        checkableGroupFlowLayoutMultiple.setLayoutAdapter(new BaseLayoutAdapter<String>(this, stringList, R.layout.checkable_flow_layout_item2) {
             @Override
             public void onDataBind(View itemView, String data, int position) {
                 TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
@@ -99,7 +99,7 @@ public class FlowLayoutSampleActivity extends AppCompatActivity {
     }
 
     private void initFlowLayout() {
-        flowLayout.setLayoutAdapter(new FlowLayoutAdapter<String>(this, stringList, R.layout.default_flow_layout_item) {
+        flowLayout.setLayoutAdapter(new BaseLayoutAdapter<String>(this, stringList, R.layout.default_flow_layout_item) {
             @Override
             public void onDataBind(View itemView, String data, int position) {
                 TextView textView = (TextView) itemView.findViewById(R.id.tv_item);
