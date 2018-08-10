@@ -93,7 +93,7 @@ public class CheckableGroupManager implements View.OnClickListener {
     public void onClick(View v) {
         if (v instanceof Checkable) {
             Checkable checkableView = (Checkable) v;
-            if (itemClickInterceptor != null && itemClickInterceptor.onInterceptorItemClick(checkableView)) {
+            if (itemClickInterceptor != null && itemClickInterceptor.onInterceptorItemClick(checkableView, checkableList.indexOf(checkableView))) {
                 return;
             }
             dealWithCheckEvent(checkableView, !checkableView.isChecked(), true);
@@ -229,9 +229,10 @@ public class CheckableGroupManager implements View.OnClickListener {
     public interface ItemClickInterceptor {
         /**
          * @param checkable
+         * @param index     被点击的 item 在 checkable 列表中的坐标
          * @return isInterceptorItemClickEvent 是否拦截后续事件
          */
-        boolean onInterceptorItemClick(Checkable checkable);
+        boolean onInterceptorItemClick(Checkable checkable, int index);
     }
 
     public ItemClickInterceptor getItemClickInterceptor() {

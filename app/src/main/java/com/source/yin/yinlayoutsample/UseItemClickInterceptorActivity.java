@@ -20,7 +20,8 @@ public class UseItemClickInterceptorActivity extends AppCompatActivity {
         commonCheckableGroup = (CommonCheckableGroup) findViewById(R.id.common_checkable_group);
         commonCheckableGroup.setItemClickInterceptor(new CheckableGroupManager.ItemClickInterceptor() {
             @Override
-            public boolean onInterceptorItemClick(Checkable checkable) {
+            public boolean onInterceptorItemClick(Checkable checkable, int index) {
+                showToast("index = " + index);
                 if (checkable instanceof CheckedTextView) {
                     CheckedTextView checkedTextView = (CheckedTextView) checkable;
                     String s = checkedTextView.getText().toString();
