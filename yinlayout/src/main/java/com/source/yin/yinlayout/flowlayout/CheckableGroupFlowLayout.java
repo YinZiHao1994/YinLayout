@@ -60,6 +60,10 @@ public class CheckableGroupFlowLayout extends FlowLayout implements CheckableGro
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        initGroupManager();
+    }
+
+    private void initGroupManager() {
         List<View> childViewList = new ArrayList<>();
         int childCount = getChildCount();
         childViewList.clear();
@@ -70,6 +74,11 @@ public class CheckableGroupFlowLayout extends FlowLayout implements CheckableGro
         checkableGroupManager.init(childViewList);
     }
 
+    @Override
+    public void onDataChange() {
+        super.onDataChange();
+        initGroupManager();
+    }
 
     public boolean isMultiple() {
         return checkableGroupManager.isMultiple();

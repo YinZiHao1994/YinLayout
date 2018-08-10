@@ -67,6 +67,10 @@ public class CommonCheckableGroup extends LinearLayout implements BaseLayoutAdap
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        initGroupManager();
+    }
+
+    private void initGroupManager() {
         List<View> childViewList = new ArrayList<>();
         int childCount = getChildCount();
         childViewList.clear();
@@ -135,6 +139,8 @@ public class CommonCheckableGroup extends LinearLayout implements BaseLayoutAdap
                 adapter.onDataBind(view, i);
             }
         }
+        //子 view 被 remove 重新添加之后需要手动重新调用 CheckableGroupManager 的相关初始化方法
+        initGroupManager();
     }
 
     @Override
