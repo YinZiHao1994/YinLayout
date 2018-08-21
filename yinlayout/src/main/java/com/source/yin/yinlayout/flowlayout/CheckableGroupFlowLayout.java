@@ -47,7 +47,7 @@ public class CheckableGroupFlowLayout extends FlowLayout implements CheckableGro
                 setMultiple(isMultiple);
             } else if (attr == R.styleable.CommonCheckableGroup_child_checkable) {
                 boolean childCheckable = a.getBoolean(attr, true);
-                setChildCheckable(childCheckable);
+                setCanChildCheckStateChange(childCheckable);
             } else if (attr == R.styleable.CommonCheckableGroup_child_check_state_cancelable) {
                 boolean childCheckStateCancelable = a.getBoolean(attr, false);
                 setChildCheckStateCancelable(childCheckStateCancelable);
@@ -141,8 +141,8 @@ public class CheckableGroupFlowLayout extends FlowLayout implements CheckableGro
     }
 
     @Override
-    public void setChildCheckable(boolean childCheckable) {
-        checkableGroupManager.setChildCheckable(childCheckable);
+    public void setCanChildCheckStateChange(boolean canChildCheckStateChange) {
+        checkableGroupManager.setChildCheckable(canChildCheckStateChange);
     }
 
     @Override
