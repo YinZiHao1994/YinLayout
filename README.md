@@ -10,6 +10,8 @@ compile 'com.yinzihao:YinLayout:{latest-version}'
 多选或单选项的父布局，类似于`{@link android.widget.RadioGroup}`。
 直接子 `view` 需要实现`{@link Checkable}`接口或利用框架中的`{@link CheckableTag}`(事实上是一个实现了`{@link Checkable}`接口的`{@link FrameLayout}`)包裹才能被监听选中状态。
 
+<div align=center><img width="270" height="510" src="https://github.com/YinZiHao1994/YinLayout/blob/master/demoimage/common_check_layout.gif"/></div>
+
 - 在 xml 中使用
 ```
 <com.source.yin.yinlayout.checkable.CommonCheckableGroup
@@ -69,7 +71,21 @@ xml 中设置 `multiple` 属性为 `ture` 则表示可多选。
 ```
 通过 `setCheckedListener()` 设置选中事件监听。通过 `getCheckedItemList()` 得到当前选中的对象列表。
 
-<div align=center><img width="270" height="510" src="https://github.com/YinZiHao1994/YinLayout/blob/master/demoimage/common_check_layout.gif"/></div>
+如果你需要在 `CheckableGroup` 的子项被点击，框架中的选中逻辑被触发之前根据情况拦截此次事件，可以设置拦截器
+
+```
+   commonCheckableGroup.setItemClickInterceptor(new CheckableGroupManager.ItemClickInterceptor() {
+       @Override
+       public boolean onInterceptorItemClick(Checkable checkable) {
+           if (...) {
+             //拦截
+             return true;
+           }
+           //不拦截
+           return false;
+       }
+   });
+```
 
 ## FlowLayout
 流式布局。子 `view` 将横向依次填满布局的每一行。
