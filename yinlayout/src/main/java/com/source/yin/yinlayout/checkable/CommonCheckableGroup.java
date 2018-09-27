@@ -52,9 +52,6 @@ public class CommonCheckableGroup extends LinearLayout implements BaseLayoutAdap
             if (attr == R.styleable.CommonCheckableGroup_multiple) {
                 boolean isMultiple = a.getBoolean(attr, false);
                 setMultiple(isMultiple);
-            } else if (attr == R.styleable.CommonCheckableGroup_child_checkable) {
-                boolean childCheckable = a.getBoolean(attr, true);
-                setCanChildCheckStateChange(childCheckable);
             } else if (attr == R.styleable.CommonCheckableGroup_child_check_state_cancelable) {
                 boolean childCheckStateCancelable = a.getBoolean(attr, false);
                 setChildCheckStateCancelable(childCheckStateCancelable);
@@ -166,11 +163,6 @@ public class CommonCheckableGroup extends LinearLayout implements BaseLayoutAdap
     @Override
     public void setItemClickInterceptor(CheckableGroupManager.ItemClickInterceptor itemClickInterceptor) {
         checkableGroupManager.setItemClickInterceptor(itemClickInterceptor);
-    }
-
-    @Override
-    public void setCanChildCheckStateChange(boolean canChildCheckStateChange) {
-        checkableGroupManager.setChildCheckable(canChildCheckStateChange);
     }
 
     @Override

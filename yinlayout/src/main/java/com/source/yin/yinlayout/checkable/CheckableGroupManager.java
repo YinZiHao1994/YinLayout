@@ -24,8 +24,6 @@ public class CheckableGroupManager implements View.OnClickListener {
     private OnItemCheckListener onItemCheckListener;
 
     private Context context;
-    //子项是否能更改被选中状态（用于某些情况下只用来展示不能编辑的被选中状态）
-    private boolean childCheckable = true;
     private CheckableGroup checkableGroup;
     private ItemClickInterceptor itemClickInterceptor;
 
@@ -67,22 +65,11 @@ public class CheckableGroupManager implements View.OnClickListener {
     }
 
 
-    public boolean isChildCheckable() {
-        return childCheckable;
-    }
-
-    public void setChildCheckable(boolean childCheckable) {
-        this.childCheckable = childCheckable;
-    }
-
     public void init(List<View> childViewList) {
         checkableList.clear();
         if (childViewList != null) {
             for (View view : childViewList) {
                 if (view instanceof Checkable) {
-                    if (childCheckable) {
-                        view.setOnClickListener(this);
-                    }
                     checkableList.add((Checkable) view);
                 }
             }
