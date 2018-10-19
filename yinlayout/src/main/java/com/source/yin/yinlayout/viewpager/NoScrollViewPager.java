@@ -1,7 +1,6 @@
-package com.source.yin.yinlayout.noscrollviewpager;
+package com.source.yin.yinlayout.viewpager;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -10,7 +9,7 @@ import android.view.MotionEvent;
  * Created by yin on 2017/12/7.
  */
 
-public class NoScrollViewPager extends ViewPager {
+public class NoScrollViewPager extends WrapContentHeightViewPager {
 
 
     public NoScrollViewPager(Context context) {
