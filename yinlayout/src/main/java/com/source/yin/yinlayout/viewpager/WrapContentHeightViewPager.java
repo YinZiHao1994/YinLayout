@@ -21,19 +21,19 @@ public class WrapContentHeightViewPager extends ViewPager {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-        int height = 0;
-        //遍历所有child的高度
-        for (int i = 0; i < getChildCount(); i++) {
-            View child = getChildAt(i);
-            child.measure(widthMeasureSpec, View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-            int h = child.getMeasuredHeight();
-            if (h > height) //采用最大的view的高度。
-                height = h;
+        //如果设置了 viewPager 的 height 为 wrap_content ,自行测量高度
+        if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
+            int height = 0;
+            //遍历所有child的高度
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                child.measure(widthMeasureSpec, View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                int h = child.getMeasuredHeight();
+                if (h > height) //采用最大的view的高度。
+                    height = h;
+            }
+            heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY);
         }
-
-        heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY);
-
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 

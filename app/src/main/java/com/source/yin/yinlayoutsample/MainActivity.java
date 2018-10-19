@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnPullToRefresh;
     private Button btnDifferentTypeCheckableItem;
     private Button btnItemClickInterceptor;
+    private Button btnViewPager;
 
 
     @Override
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPullToRefresh = (Button) findViewById(R.id.btn_pull_to_refresh);
         btnDifferentTypeCheckableItem = (Button) findViewById(R.id.btn_different_type_checkable_item);
         btnItemClickInterceptor = (Button) findViewById(R.id.btn_item_click_interceptor);
+        btnViewPager = (Button) findViewById(R.id.btn_view_pager);
 
         btnFlowLayout.setOnClickListener(this);
         btnCheckableGroup.setOnClickListener(this);
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPullToRefresh.setOnClickListener(this);
         btnDifferentTypeCheckableItem.setOnClickListener(this);
         btnItemClickInterceptor.setOnClickListener(this);
+        btnViewPager.setOnClickListener(this);
     }
 
     @Override
@@ -69,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_item_click_interceptor:
                 intent = new Intent(getApplicationContext(), UseItemClickInterceptorActivity.class);
+                break;
+            case R.id.btn_view_pager:
+                intent = new Intent(getApplicationContext(), ViewPagerActivity.class);
                 break;
         }
         if (intent != null) {
