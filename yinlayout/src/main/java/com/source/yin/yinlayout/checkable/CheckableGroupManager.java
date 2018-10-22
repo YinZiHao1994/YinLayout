@@ -70,6 +70,7 @@ public class CheckableGroupManager implements View.OnClickListener {
         if (childViewList != null) {
             for (View view : childViewList) {
                 if (view instanceof Checkable) {
+                    view.setOnClickListener(this);
                     checkableList.add((Checkable) view);
                 }
             }
